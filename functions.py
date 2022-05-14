@@ -42,6 +42,9 @@ def m_t(m_h):
     m_t = m_h/nt
     return m_t
 
+def m_L(m):
+    #convert kg/s to litres/second
+    return m/rho
 def v_t(m_h):
     #m_t = m_t(m_h)
     m_t = m_h/nt
