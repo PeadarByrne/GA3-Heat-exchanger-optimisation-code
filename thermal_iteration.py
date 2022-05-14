@@ -1,20 +1,17 @@
 import numpy as np
+import functions as fu
 
-
-#Water in temperatures
-T_h_in=60   #hot water input temperature
-T_c_in=20   #cold water input temperature
-
-#
 #Guess mh
 mh=0.45
 mt=mh/nt
 
 #made up values to test thermal
-Re_i = 11e3     #example value of Reynolds number to test function
-Re_o = 6e3      #example value of Reynolds number to test function
 m_c = 0.45      #example value of cold water mass flow rate
 m_h = 0.45      #example value of hot water mass flow rate
+
+#Find Reynolds numbers
+Re_i = fu.Re_t(m_h)
+Re_o = fu.Re_sh(m_c)
 
 def Thermal():
     A_i = np.pi * d_i * Lt * nt #sum of inner surface areas of all tubes
