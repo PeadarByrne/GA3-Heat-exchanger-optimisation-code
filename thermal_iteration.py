@@ -19,7 +19,7 @@ def Thermal():
     h_o = (Nu_o*fu.kw)/fu.d_o
     U = 1/((1/h_i) + ((fu.d_i*np.log10(fu.d_o/fu.d_i)/(2*fu.kt)))+(fu.d_i/(fu.d_o*h_o)))
 
-    dT_target = 0.05    #cut off value for change in temperature estimate between iterations
+    dT_target = 0.01    #cut off value for change in temperature estimate between iterations
     dT_c = 1    #initialise change in cold temperature output between interations
     dT_h = 1    #initialise change in hot temperature output between interations
 
@@ -52,14 +52,14 @@ def Thermal():
     mc_h = m_h*fu.Cp
     mc_min = min(mc_h,mc_c)     #find the minimum value of mcp
     #find effectiveness using the minimum fluid
-    '''
+    
     if mc_min == mc_c :
         e=(T_c_out-fu.T_c_in)/(fu.T_h_in-fu.T_c_in)
     else:
-        e=(T_h_out-fu.T_c_in)/(fu.T_h_in-fu.T_c_in)
-    '''
+        e=(fu.T_h_in-T_h_out)/(fu.T_h_in-fu.T_c_in)
+    
     #Find effectiveness using Q
-    E=Q/(mc_min*(fu.T_h_in-fu.T_c_in))
+    #E=Q/(mc_min*(fu.T_h_in-fu.T_c_in))
 
 
     print('No. of iterations = ',counter)
@@ -67,6 +67,6 @@ def Thermal():
     print('Hot output temperature = ',T_h_out)
     print('Rate of heat transfer = ',Q)
     print('Effectiveness = ',e)
-    print('Or maybe effectiveness = ',E)
+    #print('Or maybe effectiveness = ',E)
 
 Thermal()
