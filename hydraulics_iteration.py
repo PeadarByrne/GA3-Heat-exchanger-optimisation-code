@@ -10,12 +10,14 @@ sigma=fu.sigma()
 
 def hydraulic_h():
     m_h=0.45
-    dp_target=100
-    while(dp_h>dp_target):
+    m_h_target=100
+    dm_h=1
+    while(dm_h>m_h_target):
         counter +=1
         m_old = m_h
         m_hl=fu.m_L(m_h)
-        p_pump_h=0.7843*m_hl**2 - 0.4802*m_hl + 0.6598
+        
+        p_pump_h=-0.4713*m_h**2-0.8896*m_h + 0.6381
 
         m_t=fu.m_t(m_h)
         v_t=fu.v_t(m_h)
@@ -31,8 +33,7 @@ def hydraulic_h():
         p_n = 0.5*fu.rho*v_nh**2
 
         p_h = p_t + p_e + p_n
-
-        dp_h = p_h - p_pump_h
+        m_h = -0.3086*p_h**2 -0.6567*p_h + 0.5493
 
     
 
@@ -40,6 +41,7 @@ def hydraulic_h():
 
 #------Coldside analysis
 m_c=0.5
+#p_pump_c=0.7843*m_cl**2 - 0.4802*m_cl + 0.6598
 p_pump_c=-0.4713*sigma**2 - 0.8896*sigma + 0.6381
 v_sh = fu.v_sh(m_c)
 Re_sh = fu.Re_sh(m_c)
