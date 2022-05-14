@@ -33,7 +33,7 @@ Pr=4.31
 T_h_in=60   #hot water input temperature
 T_c_in=20   #cold water input temperature
 
-
+#
 #Guess mh
 mh=0.45
 mt=mh/nt
