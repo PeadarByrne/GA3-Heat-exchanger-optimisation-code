@@ -15,6 +15,7 @@ d_sh = 64e-3    #shell internal diameter
 nb = 9     #number of baffles
 b = l/nb+1    #bafle spacing 
 Y= 14e-3    #pitch spacing
+pitch_shape = 'triangular'  #arragement of copper tubes
 A_sh = d_sh*(Y - d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
 
 #Physical properties

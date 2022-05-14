@@ -1,18 +1,9 @@
 import numpy as np
 
 
-#Geometric constraints
-l=350e-3   #length of HX
-Lt=350e-3    #lenght of copper tube
-d_i=6e-3    #internal diameter of copper tube
-d_o=8e-3    #external diameter of copper tube
-
 
 #Geometric specifications
-nb=9     #number of baffles
-b=l/nb+1    #bafle spacing
-nt=13    #number of copper tubes
-pitch_shape = 'triangular'
+
 if pitch_shape is 'triangular':
     c=0.2
 if pitch_shape is 'square':
