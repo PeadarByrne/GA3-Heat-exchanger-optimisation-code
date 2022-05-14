@@ -68,5 +68,16 @@ def Thermal():
     print('Rate of heat transfer = ',Q)
     print('Effectiveness = ',e)
     #print('Or maybe effectiveness = ',E)
+    '''
+    #junk for seeing relvant P and R for correction factor F
+    T1 = fu.T_c_in
+    T2 = T_c_out
+    t1 = fu.T_h_in
+    t2 = T_h_out
+    R = (T1-T2)/(t2-t1)
+    P = (t2-t1)/(T1-t1)
+    print('R = ',R)
+    print('P = ',P)   
+    '''
 
 Thermal()
