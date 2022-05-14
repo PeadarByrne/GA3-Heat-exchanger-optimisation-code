@@ -28,7 +28,11 @@ def Thermal():
     #Water out estimates
     T_h_out=55
     T_c_out=24
+
+    #set up counter to check if stuff is broken
+    counter = 0
     while (dT_c>dT_target) or (dT_h>dT_target):
+        counter += 1
 
         T_c_out_old = T_c_out
         T_h_out_old = T_h_out   #keep the old values to see if values have converged enough
@@ -56,7 +60,7 @@ def Thermal():
         e=(T_h_out-T_c_in)/(T_h_in-T_c_in)
 
 
-    
+    print('No. of iterations = ',counter)
     print('Cold output temperature = ',T_c_out)
     print('Hot output temperature = ',T_h_out)
     print('Rate of heat transfer = ',Q)
