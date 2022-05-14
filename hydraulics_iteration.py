@@ -33,8 +33,8 @@ m_c=0.5
 v_sh = fu.v_sh(m_c)
 Re_sh = fu.Re_sh(m_c)
 
-a=
-dp_sh = 4*a*Re_sh**0.15*N*fu.rho*v_sh**2
+
+#dp_sh = 4*a*Re_sh**0.15*N*fu.rho*v_sh**2
 
 
 
