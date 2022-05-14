@@ -16,6 +16,10 @@ nb = 9     #number of baffles
 b = l/nb+1    #bafle spacing 
 Y= 14e-3    #pitch spacing
 pitch_shape = 'triangular'  #arragement of copper tubes
+if pitch_shape is 'triangular': #to give constant c for triangular pitch shape
+    c=0.2
+if pitch_shape is 'square':     #to give constant c for square pitch shape
+        c=0.15
 A_sh = d_sh*(Y - d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
 
 #Physical properties
@@ -26,6 +30,10 @@ rho = 990.1   #fluid density
 kt = 386      #thermal conductivity of the tube
 nu = mu/rho   #kinematic vicosity
 Pr = 4.31     #prandtl number of fluid
+
+#Water input temperatures
+T_h_in=60   #hot water input temperature
+T_c_in=20   #cold water input temperature
 
 def A(d):
     #function to calclate crosssectional area from diameter

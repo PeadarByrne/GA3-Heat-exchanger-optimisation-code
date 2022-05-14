@@ -1,25 +1,6 @@
 import numpy as np
 
 
-
-#Geometric specifications
-
-if pitch_shape is 'triangular':
-    c=0.2
-if pitch_shape is 'square':
-        c=0.15
-        
-
-
-#Physical properties
-Cp=4179
-kw=0.632
-mu=6.51e-4
-rho=990.1
-kt=386
-nu=mu/rho
-Pr=4.31
-
 #Water in temperatures
 T_h_in=60   #hot water input temperature
 T_c_in=20   #cold water input temperature
