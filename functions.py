@@ -1,4 +1,3 @@
-
 from pydoc import doc
 import numpy as np
 
@@ -16,9 +15,9 @@ nb = 9     #number of baffles
 b = l/nb+1    #bafle spacing 
 Y= 14e-3    #pitch spacing
 pitch_shape = 'triangular'  #arragement of copper tubes
-if pitch_shape is 'triangular': #to give constant c for triangular pitch shape
+if pitch_shape == 'triangular': #to give constant c for triangular pitch shape
     c=0.2
-if pitch_shape is 'square':     #to give constant c for square pitch shape
+if pitch_shape == 'square':     #to give constant c for square pitch shape
         c=0.15
 A_sh = d_sh*(Y - d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
 
