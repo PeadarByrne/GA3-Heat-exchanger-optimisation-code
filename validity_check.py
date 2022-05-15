@@ -33,3 +33,9 @@ mass_total = mass_tubes+mass_shell+mass_nozz+mass_plates+mass_baffles
 if mass_total > fu.mass_limit:
     raise ValueError('This design is overweight')
 
+#check end chamber room/space fr end nozzles
+
+#check closeness of holes in plates
+holespace = fu.Y - fu.d_o
+if holespace > fu.holespace_min:
+    raise ValueError('Holes in the tube end plates are too close together')

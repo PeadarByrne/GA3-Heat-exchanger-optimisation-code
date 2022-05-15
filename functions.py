@@ -9,6 +9,7 @@ Lt_extra = 2e-3 #additional length of copper pipe needed to fit pipes in securel
 t_b = 1.5e-3    #baffle thickness
 t_p = 4.5e-3    #tube plate and end plate thickness
 bore_n = 20e-3  #bore of nozzles
+holespace_min = 2e-3    #minimum gap between holes in tube plates
 
 
 #Mass constraints
