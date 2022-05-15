@@ -5,7 +5,7 @@ import numpy as np
 l = 350e-3   #length of HX
 Lt = 350e-3    #lenght of copper tube
 Lt_total = 3.5  #total length of copper tube available
-Lt_extra = 2e-3 #additional length of copper pipe needed to fit pipes in securely
+Lt_extra = 2e-3 #additional length of copper pipe needed to fit pipes in securely, sum of both ends
 t_b = 1.5e-3    #baffle thickness
 t_p = 4.5e-3    #tube plate and end plate thickness
 bore_n = 20e-3  #bore of nozzles
@@ -14,7 +14,7 @@ bore_n = 20e-3  #bore of nozzles
 #Mass constraints
 mass_limit = 1.1 #limit to the total mass of the heat exchanger
 mlt = 0.2   #mass per unit length for copper tube
-mlp = 0.65  #mass per unit lenght for acrylic pipe
+mls = 0.65  #mass per unit lenght for acrylic shell
 m_n = 0.025 #mass per nozzle
 map = 6.375 #mass per unit area for tube plates and end plates
 mab = 2.39  #mass per unit area for baffles
