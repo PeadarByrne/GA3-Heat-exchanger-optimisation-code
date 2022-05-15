@@ -20,18 +20,15 @@ mab = 2.39  #mass per unit area for baffles
 
 #Geometric specifications
 nt = 13   #number of tubes
+N = 13    #number of tubes in shell flow path
 d_i = 6e-3     #ID copper tube
 d_o = 8e-3     #OD copper tube
 d_n = 20e-3   #nozzle internal diameter
 d_sh = 64e-3    #shell internal diameter
 nb = 9     #number of baffles
 b = l/nb+1    #bafle spacing 
-Y= 14e-3    #pitch spacing
-pitch_shape = 'triangular'  #arragement of copper tubes
-if pitch_shape == 'triangular': #to give constant c for triangular pitch shape
-    c=0.2
-if pitch_shape == 'square':     #to give constant c for square pitch shape
-        c=0.15
+Y = 14e-3    #pitch spacing
+pitch_shape = 'square'   #string description 'triangular' or 'square'
 A_sh = d_sh*(Y - d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
 
 #Physical properties
@@ -50,6 +47,20 @@ T_c_in=20   #cold water input temperature
 def A(d):
     #function to calclate crosssectional area from diameter
     return np.pi*d**2/4
+
+def pitch(pitch_shape):
+    #input pitch shape as string description 'triangular' or 'square'
+    if pitch_shape == 'triangular': #to give constants for triangular pitch shape
+        c=0.2
+        a=0.2
+        return c,a
+    if pitch_shape == 'square':     #to give constants for square pitch shape
+        c=0.15
+        a=0.34
+        return c,a
+
+c , a = pitch(pitch_shape)
+
 
 def m_t(m_h):
     m_t = m_h/nt

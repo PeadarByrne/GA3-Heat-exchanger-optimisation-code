@@ -9,8 +9,8 @@ sigma=fu.sigma()
 
 
 def hydraulic_h():
-    m_h=0.45
-    m_h_target=0.01
+    m_h=0.5
+    m_h_target=0.00001
     dm_h=1
     counter =0
     while(dm_h>m_h_target):
@@ -35,7 +35,7 @@ def hydraulic_h():
 
         p_h = p_t + p_e + p_n   #pressure in pascals
         p_hb = p_h/1e5          #pressure in bar
-        m_h = -0.3086*p_hb**2 -0.6567*p_hb + 0.5493
+        m_h = (-0.3086*p_hb**2 -0.6567*p_hb + 0.5493)*fu.rho*1e-3
 
         dm_h=abs(m_h-m_h_old)
         print(counter)
@@ -49,14 +49,21 @@ print(m_h)
 
 
 #------Coldside analysis
-m_c=0.5
-#p_pump_c=0.7843*m_cl**2 - 0.4802*m_cl + 0.6598
-p_pump_c=-0.4713*sigma**2 - 0.8896*sigma + 0.6381
-v_sh = fu.v_sh(m_c)
-Re_sh = fu.Re_sh(m_c)
 
+
+def hydraulics_c():
+    m_c=0.4
+    m_c_target=0.01
+    dm_c=1
+    counter =0
+    #p_pump_c=0.7843*m_cl**2 - 0.4802*m_cl + 0.6598
+    # p_pump_c=-0.4713*sigma**2 - 0.8896*sigma + 0.6381
+
+    v_sh = fu.v_sh(m_c)
+    Re_sh = fu.Re_sh(m_c)
+    N=5
+    p_sh = 4*fu.a*Re_sh**-0.15*N*fu.rho*v_sh**2 #Shell side pressure loss (This has poor validity)
+    
 
 #dp_sh = 4*a*Re_sh**0.15*N*fu.rho*v_sh**2
-
-
 
