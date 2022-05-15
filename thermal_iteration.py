@@ -1,10 +1,16 @@
 import numpy as np
 import functions as fu
+import hydraulics_iteration as hydro
 
-
+'''
 #made up values to test thermal, final code will need to pull these from hydaulics
 m_c = 0.5      #example value of cold water mass flow rate
 m_h = 0.48     #example value of hot water mass flow rate
+#These mass flow rates need to be different to eachother to prevent dividing by zero
+'''
+#made up values to test thermal, final code will need to pull these from hydaulics
+m_c = hydro.m_c      #example value of cold water mass flow rate
+m_h = hydro.m_h     #example value of hot water mass flow rate
 #These mass flow rates need to be different to eachother to prevent dividing by zero
 
 #Find Reynolds numbers
