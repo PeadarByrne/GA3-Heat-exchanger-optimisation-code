@@ -24,18 +24,18 @@ map = 6.375 #mass per unit area for tube plates and end plates
 mab = 2.39  #mass per unit area for baffles
 
 
-#Geometric specifications
+#Geometric specifications - variables
 l = 350e-3   #length of shell
-Lt = 350e-3    #lenght of copper tube
-nt = 13   #number of tubes
-N = 13    #number of tubes in shell flow path
+
+#Lt = 350e-3    #length of copper tube
+#nt = 13   #number of tubes
+#N = 13    #number of tubes in shell flow path
 nt_cross = 5    #number of tubes in longest straight line
-nb = 9     #number of baffles
-Y = 14e-3    #pitch spacing between centres
+#nb = 9     #number of baffles
+#Y = 14e-3    #pitch spacing between centres
 pitch_shape = 'square'   #string description 'triangular' or 'square'
 
-b = Lt/(nb+1)    #baffle spacing
-A_sh = d_sh*(Y - d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
+
 
 
 #Physical properties
@@ -66,23 +66,23 @@ def pitch(pitch_shape):
         a=0.34
         return c,a
 
-c , a = pitch(pitch_shape)
 
 
-def m_t(m_h):
+
+def m_t(m_h,nt):
     m_t = m_h/nt
     return m_t
 
 def m_L(m):
     #convert kg/s to litres/second
     return m/rho
-def v_t(m_h):
+def v_t(m_h,nt):
     #m_t = m_t(m_h)
     m_t = m_h/nt
     v_t = m_t/(rho*A(d_i))
     return  v_t
 
-def Re_t(m_h):
+def Re_t(m_h,nt):
     #calculate Reynolds from mass flow rate
     m_t = m_h/nt
     v_t = m_t/(rho*A(d_i))
@@ -94,15 +94,15 @@ def v_n(m):
     v_n = m/(rho*A(d_n))
     return v_n
 
-def sigma():
+def sigma(nt):
     return nt*A(d_i)/A(d_sh)
 
     
-def v_sh(m_c):
+def v_sh(m_c,A_sh):
     v_sh=m_c/(rho*A_sh)
     return v_sh
 
-def Re_sh(m_c):
+def Re_sh(m_c,A_sh):
     #calculate Reynolds
     v_sh=m_c/(rho*A_sh)
     Re_sh=(v_sh*d_o/nu)
