@@ -15,7 +15,7 @@ def CheckTubeLength(Lt,nt):
 
 
 #check that tubes fit in shell
-def CheckTubesInShell(nt_cross,Y)
+def CheckTubesInShell(nt_cross,Y):
     d_t_total = (nt_cross +1)*Y
     if d_t_total > fu.d_sh:
         raise ValueError('The pipes do not fit in the shell')
@@ -38,14 +38,14 @@ def CheckMass(Lt,l,nt,nb):
         raise ValueError('This design is overweight')
 
 #check end chamber room/space for end nozzles
-def CheckEnds(l,Lt)
+def CheckEnds(l,Lt):
     l_endspace = (l-Lt)/2 #length of end chambers
     if l_endspace < fu.l_endspace_min:
         raise ValueError('Does not allow sufficient spaces for nozzles at either end')
 
 
 #check closeness of holes in plates
-def CheckHoles(Y)
+def CheckHoles(Y):
     holespace = Y - fu.d_o
     if holespace > fu.holespace_min:
         raise ValueError('Holes in the tube end plates are too close together')
