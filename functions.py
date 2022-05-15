@@ -34,8 +34,9 @@ nb = 9     #number of baffles
 Y = 14e-3    #pitch spacing between centres
 pitch_shape = 'square'   #string description 'triangular' or 'square'
 
-A_sh = d_sh*(Y - d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
 b = l/(nb+1)    #baffle spacing
+A_sh = d_sh*(Y - d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
+
 
 #Physical properties
 Cp = 4179     #specific heat capacity of fluid
