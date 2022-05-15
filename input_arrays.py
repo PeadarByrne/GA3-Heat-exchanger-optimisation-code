@@ -1,7 +1,7 @@
 #Contains the potential HX designs/layouts
 
 #string descriptions of pitch shape
-shape_array = ["sqaure","sqaure","sqaure","sqaure","sqaure","sqaure","triangular","triangular","triangular","triangular"]
+shape_array = ["square","square","square","square","square","square","triangular","triangular","triangular","triangular"]
 
 #numbers of tubes
 nt_array = [4,5,9,12,13,16,3,7,13,16]
