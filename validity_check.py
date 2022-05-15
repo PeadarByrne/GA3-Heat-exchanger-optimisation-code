@@ -1,14 +1,22 @@
+from matplotlib.pyplot import vlines
 import functions as fu
+
+#check total length of HX
+if fu.l > fu.l_max:
+    raise ValueError('The heat exchanger is too long')
+
 
 #check that we have enough copper tube
 Lt_used = (fu.Lt + fu.Lt_extra) * fu.nt
 if Lt_used > fu.Lt_total:
     raise ValueError('This design uses too much copper pipe')
 
+
 #check that tubes fit in shell
 d_t_total = (fu.nt_cross +1)*fu.Y
 if d_t_total > fu.d_sh:
     raise ValueError('The pipes do not fit in the shell')
+
 
 #check that HX in not overweight
 mass_tubes = (fu.Lt+fu.Lt_extra)*fu.mlt #total mass of copper tubes used

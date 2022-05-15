@@ -2,7 +2,7 @@ from pydoc import doc
 import numpy as np
 
 #Geometric constraints
-l = 350e-3   #length of HX
+l_max = 350e-3  #maximum permissible length of HX
 Lt = 350e-3    #lenght of copper tube
 Lt_total = 3.5  #total length of copper tube available
 Lt_extra = 2e-3 #additional length of copper pipe needed to fit pipes in securely, sum of both ends
@@ -21,6 +21,7 @@ mab = 2.39  #mass per unit area for baffles
 
 
 #Geometric specifications
+l = 350e-3   #length of HX
 nt = 13   #number of tubes
 N = 13    #number of tubes in shell flow path
 nt_cross = 5    #number of tubes in longest straight line
