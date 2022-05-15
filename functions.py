@@ -10,7 +10,10 @@ t_p = 4.5e-3    #tube plate and end plate thickness
 bore_n = 20e-3  #bore of nozzles
 holespace_min = 2e-3    #minimum gap between holes in tube plates
 l_endspace_min = 53.5e-3    #minimum length of end chambers
-
+d_i = 6e-3     #ID copper tube
+d_o = 8e-3     #OD copper tube
+d_n = 20e-3   #nozzle internal diameter
+d_sh = 64e-3    #shell internal diameter
 
 #Mass constraints
 mass_limit = 1.1 #limit to the total mass of the heat exchanger
@@ -27,15 +30,12 @@ Lt = 350e-3    #lenght of copper tube
 nt = 13   #number of tubes
 N = 13    #number of tubes in shell flow path
 nt_cross = 5    #number of tubes in longest straight line
-d_i = 6e-3     #ID copper tube
-d_o = 8e-3     #OD copper tube
-d_n = 20e-3   #nozzle internal diameter
-d_sh = 64e-3    #shell internal diameter
 nb = 9     #number of baffles
-b = l/(nb+1)    #bafle spacing 
 Y = 14e-3    #pitch spacing between centres
 pitch_shape = 'square'   #string description 'triangular' or 'square'
+
 A_sh = d_sh*(Y - d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
+b = l/(nb+1)    #baffle spacing
 
 #Physical properties
 Cp = 4179     #specific heat capacity of fluid
