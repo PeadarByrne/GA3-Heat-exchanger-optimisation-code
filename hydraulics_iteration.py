@@ -10,21 +10,22 @@ sigma=fu.sigma()
 
 def hydraulic_h():
     m_h=0.45
-    m_h_target=100
+    m_h_target=0.01
     dm_h=1
+    counter =0
     while(dm_h>m_h_target):
         counter +=1
-        m_old = m_h
-        m_hl=fu.m_L(m_h)
-        
-        p_pump_h=-0.4713*m_h**2-0.8896*m_h + 0.6381
+        m_h_old = m_h
+
+        # m_hl=fu.m_L(m_h)
+        # p_pump_h=-0.4713*m_h**2-0.8896*m_h + 0.6381
 
         m_t=fu.m_t(m_h)
         v_t=fu.v_t(m_h)
         v_nh=fu.v_n(m_h)
         Re_t=fu.Re_t(m_h)
 
-        f=(1.82*np.log10(Re_t) - 1.64)**-2
+        f=(1.82*np.log10(Re_t) - 1.64)**-2           #estimation of the friction factor in the copper tubes
 
         p_t = f*(fu.Lt/fu.d_i)*0.5*fu.rho*v_t**2     #pressure drop along copper tubes from friction
         kc = -0.3952*sigma + 0.4973
@@ -32,8 +33,16 @@ def hydraulic_h():
         p_e = 0.5*fu.rho*v_t**2*(kc + ke)
         p_n = 0.5*fu.rho*v_nh**2
 
-        p_h = p_t + p_e + p_n
-        m_h = -0.3086*p_h**2 -0.6567*p_h + 0.5493
+        p_h = p_t + p_e + p_n   #pressure in pascals
+        p_hb = p_h/1e5          #pressure in bar
+        m_h = -0.3086*p_hb**2 -0.6567*p_hb + 0.5493
+
+        dm_h=abs(m_h-m_h_old)
+        print(counter)
+    return m_h    
+
+m_h=hydraulic_h()
+print(m_h)
 
     
 
