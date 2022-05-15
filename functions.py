@@ -26,7 +26,7 @@ d_o = 8e-3     #OD copper tube
 d_n = 20e-3   #nozzle internal diameter
 d_sh = 64e-3    #shell internal diameter
 nb = 9     #number of baffles
-b = l/nb+1    #bafle spacing 
+b = l/(nb+1)    #bafle spacing 
 Y = 14e-3    #pitch spacing
 pitch_shape = 'square'   #string description 'triangular' or 'square'
 A_sh = d_sh*(Y - d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
@@ -76,7 +76,7 @@ def v_t(m_h):
     return  v_t
 
 def Re_t(m_h):
-    #calculate Reynolds
+    #calculate Reynolds from mass flow rate
     m_t = m_h/nt
     v_t = m_t/(rho*A(d_i))
     Re_t=(v_t*d_i/nu)
