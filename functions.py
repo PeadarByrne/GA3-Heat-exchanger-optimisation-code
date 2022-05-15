@@ -23,13 +23,14 @@ mab = 2.39  #mass per unit area for baffles
 #Geometric specifications
 nt = 13   #number of tubes
 N = 13    #number of tubes in shell flow path
+nt_cross = 5    #number of tubes in longest straight line
 d_i = 6e-3     #ID copper tube
 d_o = 8e-3     #OD copper tube
 d_n = 20e-3   #nozzle internal diameter
 d_sh = 64e-3    #shell internal diameter
 nb = 9     #number of baffles
 b = l/(nb+1)    #bafle spacing 
-Y = 14e-3    #pitch spacing
+Y = 14e-3    #pitch spacing between centres
 pitch_shape = 'square'   #string description 'triangular' or 'square'
 A_sh = d_sh*(Y - d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
 
