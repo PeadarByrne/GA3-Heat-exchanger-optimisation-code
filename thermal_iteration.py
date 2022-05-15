@@ -67,12 +67,11 @@ def Thermal():
     #Find effectiveness using Q
     #E=Q/(mc_min*(fu.T_h_in-fu.T_c_in))
 
-
-    print('No. of iterations = ',counter)
-    print('Cold output temperature = ',T_c_out)
-    print('Hot output temperature = ',T_h_out)
-    print('Rate of heat transfer = ',Q)
-    print('Effectiveness = ',e)
+    # print('No. of iterations = ',counter)
+    # print('Cold output temperature = ',T_c_out)
+    # print('Hot output temperature = ',T_h_out)
+    # print('Rate of heat transfer = ',Q)
+    # print('Effectiveness = ',e)
     #print('Or maybe effectiveness = ',E)
     '''
     #junk for seeing relvant P and R for correction factor F
@@ -85,5 +84,36 @@ def Thermal():
     print('R = ',R)
     print('P = ',P)   
     '''
+    return e,Q
 
-Thermal()
+
+
+def Thermal_NTU():
+    A_i = np.pi * fu.d_i * fu.Lt * fu.nt #sum of inner surface areas of all tubes
+    Nu_i = 0.023 * (Re_i**0.8) * (fu.Pr**0.3) #inner Nusselt number
+    Nu_o = fu.c * (Re_o**0.6) * (fu.Pr**0.3) #outer Nusselt number  #c is 0.2 for triangular tube pitch and0.15 for square tube pitch
+    h_i = (Nu_i*fu.kw)/fu.d_i
+    h_o = (Nu_o*fu.kw)/fu.d_o
+    U = 1/((1/h_i) + ((fu.d_i*np.log10(fu.d_o/fu.d_i)/(2*fu.kt)))+(fu.d_i/(fu.d_o*h_o)))
+
+    mc_c = m_c*fu.Cp  
+    mc_h = m_h*fu.Cp
+    mc_min = min(mc_h,mc_c) 
+    mc_max = max(mc_h,mc_c)
+
+    Rc = mc_min/mc_max    #Ratio of the heat capacities
+    NTU = U*A_i/mc_min    #Number of Transfer Units
+
+    e_NTU = (1 - np.exp(-NTU*(1 - Rc)))/(1 - Rc*np.exp(-NTU*(1 - Rc)))
+
+    Q_max= mc_min*(fu.T_h_in - fu.T_c_in)
+    Q = e_NTU*Q_max
+    return e_NTU,Q
+
+e_NTU, Q_NTU = Thermal_NTU()
+print("Effectiveness (NTU): {}".format(e_NTU))
+print("Q (NTU): {}".format(Q_NTU))
+
+e_LMTD,Q_LMTD = Thermal()
+print("Effectiveness (NTU): {}".format(e_NTU))
+print("Q (LMTD): {}".format(Q_LMTD))
