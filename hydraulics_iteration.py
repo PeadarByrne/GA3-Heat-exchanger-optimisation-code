@@ -54,8 +54,8 @@ def hydraulic_c(Lt,Y,nb,N,pitch_shape):
     dm_c=1
   
     c , a = fu.pitch(pitch_shape)
-    b = Lt/(nb+1)    #baffle spacing
-    A_sh = fu.d_sh*(Y - fu.d_o)*(b/Y)     #flow area of fluid in shell inbetween baffles
+        
+    A_sh = fu.A_sh(Y,nb,Lt) 
     counter =0
     while(dm_c>dm_c_target):
         counter+=1

@@ -8,19 +8,19 @@ m_c = 0.5      #example value of cold water mass flow rate
 m_h = 0.48     #example value of hot water mass flow rate
 #These mass flow rates need to be different to eachother to prevent dividing by zero
 '''
-#made up values to test thermal, final code will need to pull these from hydaulics
-m_c = hydro.m_c      #example value of cold water mass flow rate
-m_h = hydro.m_h     #example value of hot water mass flow rate
-#These mass flow rates need to be different to eachother to prevent dividing by zero
+   
 
-#Find Reynolds numbers
-Re_i = fu.Re_t(m_h)
-Re_o = fu.Re_sh(m_c)
+def Thermal(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
+    #Find Reynolds numbers
+    Re_i = fu.Re_t(m_h,nt)
+    A_sh = fu.A_sh(Y,nb,Lt) 
+    Re_o = fu.Re_sh(m_c,A_sh)
 
-def Thermal():
-    A_i = np.pi * fu.d_i * fu.Lt * fu.nt #sum of inner surface areas of all tubes
+    c , a = fu.pitch(pitch_shape)
+
+    A_i = np.pi * fu.d_i * Lt * nt #sum of inner surface areas of all tubes
     Nu_i = 0.023 * (Re_i**0.8) * (fu.Pr**0.3) #inner Nusselt number
-    Nu_o = fu.c * (Re_o**0.6) * (fu.Pr**0.3) #outer Nusselt number  #c is 0.2 for triangular tube pitch and0.15 for square tube pitch
+    Nu_o = c * (Re_o**0.6) * (fu.Pr**0.3) #outer Nusselt number  #c is 0.2 for triangular tube pitch and0.15 for square tube pitch
     h_i = (Nu_i*fu.kw)/fu.d_i
     h_o = (Nu_o*fu.kw)/fu.d_o
     U = 1/((1/h_i) + ((fu.d_i*np.log10(fu.d_o/fu.d_i)/(2*fu.kt)))+(fu.d_i/(fu.d_o*h_o)))
@@ -88,10 +88,16 @@ def Thermal():
 
 
 
-def Thermal_NTU():
-    A_i = np.pi * fu.d_i * fu.Lt * fu.nt #sum of inner surface areas of all tubes
+def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
+    Re_i = fu.Re_t(m_h,nt)
+    A_sh = fu.A_sh(Y,nb,Lt) 
+    Re_o = fu.Re_sh(m_c,A_sh)
+
+    c , a = fu.pitch(pitch_shape)
+
+    A_i = np.pi * fu.d_i * Lt * nt #sum of inner surface areas of all tubes
     Nu_i = 0.023 * (Re_i**0.8) * (fu.Pr**0.3) #inner Nusselt number
-    Nu_o = fu.c * (Re_o**0.6) * (fu.Pr**0.3) #outer Nusselt number  #c is 0.2 for triangular tube pitch and0.15 for square tube pitch
+    Nu_o = c * (Re_o**0.6) * (fu.Pr**0.3) #outer Nusselt number  #c is 0.2 for triangular tube pitch and0.15 for square tube pitch
     h_i = (Nu_i*fu.kw)/fu.d_i
     h_o = (Nu_o*fu.kw)/fu.d_o
     U = 1/((1/h_i) + ((fu.d_i*np.log10(fu.d_o/fu.d_i)/(2*fu.kt)))+(fu.d_i/(fu.d_o*h_o)))
@@ -110,10 +116,11 @@ def Thermal_NTU():
     Q = e_NTU*Q_max
     return e_NTU,Q
 
-e_NTU, Q_NTU = Thermal_NTU()
+e_NTU, Q_NTU = Thermal_NTU(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
 print("Effectiveness (NTU): {}".format(e_NTU))
 print("Q (NTU): {}".format(Q_NTU))
 
-e_LMTD,Q_LMTD = Thermal()
-print("Effectiveness (NTU): {}".format(e_NTU))
+#m_h, m_c, nt, nb, Y, Lt, pitch_shape
+e_LMTD,Q_LMTD = Thermal(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
+print("Effectiveness (LMTD): {}".format(e_LMTD))
 print("Q (LMTD): {}".format(Q_LMTD))

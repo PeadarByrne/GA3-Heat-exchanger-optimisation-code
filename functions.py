@@ -33,7 +33,7 @@ l = 350e-3   #length of shell
 nt_cross = 5    #number of tubes in longest straight line
 #nb = 9     #number of baffles
 #Y = 14e-3    #pitch spacing between centres
-pitch_shape = 'square'   #string description 'triangular' or 'square'
+#pitch_shape = 'square'   #string description 'triangular' or 'square'
 
 
 
@@ -54,6 +54,11 @@ T_c_in=20   #cold water input temperature
 def A(d):
     #function to calclate crosssectional area from diameter
     return np.pi*d**2/4
+
+def A_sh(Y,nb,Lt):
+    b = Lt/(nb+1)   #baffle spacing
+    A_sh = d_sh*(Y - d_o)*(b/Y)   #flow area of fluid in shell inbetween baffles
+    return A_sh
 
 def pitch(pitch_shape):
     #input pitch shape as string description 'triangular' or 'square'
