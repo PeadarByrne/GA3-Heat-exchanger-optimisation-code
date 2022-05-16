@@ -49,7 +49,7 @@ def CheckEnds(l,Lt):
 #check closeness of holes in plates
 def CheckHoles(Y):
     holespace = Y - fu.d_o
-    if holespace > fu.holespace_min:
+    if holespace < fu.holespace_min:
         raise ValueError('Holes in the tube end plates are too close together')
 
 #Function to check all input arrays are equal length
@@ -67,7 +67,7 @@ def CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
         raise ValueError('Y_array is not the same length as shape_array')
 
 
-#Function that runs all checks
+#Function that runs all checks for one design (run a separate array lenghts check)
 def CheckDesign(l,Lt,nt,nt_cross,Y,nb):
     CheckHXlength(l)
     CheckTubeLength(Lt,nt)
@@ -75,4 +75,3 @@ def CheckDesign(l,Lt,nt,nt_cross,Y,nb):
     CheckMass(Lt,l,nt,nb)
     CheckEnds(l,Lt)
     CheckHoles(Y)
-    CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array)

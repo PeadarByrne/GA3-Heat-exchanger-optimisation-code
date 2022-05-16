@@ -10,7 +10,7 @@ m_h = 0.48     #example value of hot water mass flow rate
 '''
    
 
-def Thermal(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
+def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
     #Find Reynolds numbers
     Re_i = fu.Re_t(m_h,nt)
     A_sh = fu.A_sh(Y,nb,Lt) 
@@ -116,11 +116,13 @@ def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
     Q = e_NTU*Q_max
     return e_NTU,Q
 
+'''
 e_NTU, Q_NTU = Thermal_NTU(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
 print("Effectiveness (NTU): {}".format(e_NTU))
 print("Q (NTU): {}".format(Q_NTU))
 
 #m_h, m_c, nt, nb, Y, Lt, pitch_shape
-e_LMTD,Q_LMTD = Thermal(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
+e_LMTD,Q_LMTD = Thermal_LMTD(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
 print("Effectiveness (LMTD): {}".format(e_LMTD))
 print("Q (LMTD): {}".format(Q_LMTD))
+'''
