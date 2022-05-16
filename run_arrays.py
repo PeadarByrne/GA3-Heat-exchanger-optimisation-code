@@ -10,7 +10,7 @@ import input_arrays as input
 #Function runs simulations for geometries in input arrays
 def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array,nb_array):
     #check lengths of input arrays
-    #check.CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array)
+    check.CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array)
     #Initialise output arrays
     e_LMTD_array=[]
     Q_LMTD_array=[]
@@ -28,11 +28,14 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
         Y=Y_array[i]
         N=nt    #only valid for single pass
 
-        #check design is legal
-        #check.CheckDesign(l,lt,nt,nt_cross,Y,nb)
+
 
         for j in range(len(nb_array)):
             nb = nb_array[j]
+
+            #check design is legal
+            #check.CheckDesign(l,lt,nt,nt_cross,Y,nb)
+            
             m_c=hydro.hydraulic_c(lt,Y,nb,N,shape)  #run cold hydrualics function
             m_h=hydro.hydraulic_h(lt,nt)    #run hot hydraulics
             (e_LMTD,Q_LMTD) = thermal.Thermal_LMTD(m_h,m_c,nt,nb,Y,lt,shape)    #Run LMDT analysis
