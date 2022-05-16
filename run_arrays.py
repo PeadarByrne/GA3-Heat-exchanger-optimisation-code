@@ -61,10 +61,16 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
     # print(e_NTU_array)
     # print('NTU heat transfer rates')
     # print(Q_NTU_array)
-
-    return e_LMTD_max ,Q_LMTD_max, e_NTU_max, Q_NTU_max #e_LMTD_array,Q_LMTD_array,e_NTU_array,Q_NTU_array
+    i_nt, i_nb =fu.index_seperator(index_LMTD,nt_array,nb_array)
+    if i_nt>5:
+        shape = "triangle"
+    else:
+        shape = "square"
+    nb=nb_array[i_nb]
+    nt=nt_array[i_nt]
+    return e_LMTD_max ,Q_LMTD_max, e_NTU_max, Q_NTU_max ,nt, nb, shape #e_LMTD_array,Q_LMTD_array,e_NTU_array,Q_NTU_array
 
     
-e_LMTD_max, Q_LMTD_max, e_NTU_max, Q_NTU_max = run_optimisation(input.shape_array,input.nt_array,input.nt_cross_array,input.l_array,input.lt_array,input.Y_array,input.nb_array)
+e_LMTD_max, Q_LMTD_max, e_NTU_max, Q_NTU_max, i_nt, i_b, shape = run_optimisation(input.shape_array,input.nt_array,input.nt_cross_array,input.l_array,input.lt_array,input.Y_array,input.nb_array)
 
-print(e_LMTD_max, Q_LMTD_max,e_NTU_max, Q_NTU_max)
+print("e_LMTD_max: {}, Q_LMTD_max: {},e_NTU_max: {}, Q_NTU_max: {},nt: {}, nb: {}, shape: {}".format(e_LMTD_max, Q_LMTD_max,e_NTU_max, Q_NTU_max,i_nt, i_b, shape))

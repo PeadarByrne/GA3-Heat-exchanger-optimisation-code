@@ -120,7 +120,9 @@ def return_max(array):
     value = array[index]
     return index, value
 
-# def index_seperator(index,nt_array,b_array):
-#     # find the index for the number of tubes and baffles from the index of the max value
-#     sep= len(b_array)   #number of indexes before the next baffle index
-#     i_nt=np.floor(index/sep)
+def index_seperator(index,nt_array,nb_array):
+    # find the index for the number of tubes and baffles from the index of the max value
+    sep= len(nb_array)   #number of indexes before the next baffle index
+    i_nt=int(np.floor(index/sep))
+    i_b = int(index%sep)
+    return i_nt, i_b

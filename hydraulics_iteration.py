@@ -92,10 +92,10 @@ def hydraulic_c(Lt,Y,nb,N,pitch_shape):
     return m_c
 
 
-'''
-#---------calculate massflow rates
-m_c = hydraulic_c(350e-3,14e-3,9,13,'square')
-m_h = hydraulic_h(350e-3,13)
-print("hotside mass flow rate: {}".format(m_h))
-print("coldside mass flow rate: {}".format(m_c))
-'''
+
+# #---------calculate massflow rates
+# m_c = hydraulic_c(350e-3,14e-3,9,13,'square')
+# m_h = hydraulic_h(350e-3,13)
+# print("hotside mass flow rate: {}".format(m_h))
+# print("coldside mass flow rate: {}".format(m_c))
+

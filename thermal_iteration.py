@@ -100,7 +100,7 @@ def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
     Nu_o = c * (Re_o**0.6) * (fu.Pr**0.3) #outer Nusselt number  #c is 0.2 for triangular tube pitch and0.15 for square tube pitch
     h_i = (Nu_i*fu.kw)/fu.d_i
     h_o = (Nu_o*fu.kw)/fu.d_o
-    U = 1/((1/h_i) + ((fu.d_i*np.log10(fu.d_o/fu.d_i)/(2*fu.kt)))+(fu.d_i/(fu.d_o*h_o)))
+    U = 1/((1/h_i) + ((fu.d_i*np.log(fu.d_o/fu.d_i)/(2*fu.kt)))+(fu.d_i/(fu.d_o*h_o)))
 
     mc_c = m_c*fu.Cp  
     mc_h = m_h*fu.Cp
@@ -116,13 +116,12 @@ def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
     Q = e_NTU*Q_max
     return e_NTU,Q
 
-'''
-e_NTU, Q_NTU = Thermal_NTU(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
-print("Effectiveness (NTU): {}".format(e_NTU))
-print("Q (NTU): {}".format(Q_NTU))
 
-#m_h, m_c, nt, nb, Y, Lt, pitch_shape
-e_LMTD,Q_LMTD = Thermal_LMTD(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
-print("Effectiveness (LMTD): {}".format(e_LMTD))
-print("Q (LMTD): {}".format(Q_LMTD))
-'''
+# e_NTU, Q_NTU = Thermal_NTU(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
+# print("Effectiveness (NTU): {}".format(e_NTU))
+# print("Q (NTU): {}".format(Q_NTU))
+
+# #m_h, m_c, nt, nb, Y, Lt, pitch_shape
+# e_LMTD,Q_LMTD = Thermal_LMTD(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
+# print("Effectiveness (LMTD): {}".format(e_LMTD))
+# print("Q (LMTD): {}".format(Q_LMTD))
