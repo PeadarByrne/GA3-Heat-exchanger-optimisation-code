@@ -1,3 +1,4 @@
 Create functions to have better input arrays
 Get checks working
 Improve numerical performance of hydraulic iteration loops
+Add iteration for multipass heat exchangers
