@@ -5,7 +5,7 @@ import numpy as np
 shape_array = ["square","square","square","square","square","square","triangular","triangular","triangular","triangular"]
 
 #numbers of tubes
-nt_array = [4,5,9,12,13,16,3,7,13,16]
+nt_array = [4,5,9,12,13,16,3,7,13,19]
 
 #number of tubes in longest straight line or equivalent for funky layouts
 nt_cross_array = [2.828427125,3,4.242640687,4.16227766,5,5.656854249,2,3,4.464101615,5]
