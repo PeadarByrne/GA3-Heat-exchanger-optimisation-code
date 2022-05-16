@@ -42,7 +42,12 @@ def hydraulic_h(Lt,nt):
         m_h = (-0.3086*p_hb**2 -0.6567*p_hb + 0.5493)*fu.rho*1e-3   #regression function from excel spreadsheet correlating the pressure drop across the pump to mass flow
 
         dm_h=abs(m_h-m_h_old)
- 
+
+    # check calculated m_h is within the limits of the pumps capabilities
+    if m_h > 0.4583:
+        m_h =0.4583
+    elif m_h < 0.0694:
+        m_h = 0.0694
     return m_h    
 
 #------Coldside analysis
@@ -51,7 +56,7 @@ def hydraulic_h(Lt,nt):
 def hydraulic_c(Lt,Y,nb,N,pitch_shape):
     m_c=0.5
     dm_c_target=0.00001
-    dm_c=1
+    dm_c=0.1
   
     c , a = fu.pitch(pitch_shape)
         
@@ -70,7 +75,14 @@ def hydraulic_c(Lt,Y,nb,N,pitch_shape):
 
         p_cb = p_c/1e5
         m_c = -0.6221*p_cb**2 - 0.506*p_cb + 0.6463
+        print(m_c)
         dm_c = abs(m_c-m_c_old)
+
+    # check calculated m_c is within the limits of the pumps capabilities
+    if m_c > 0.5833:
+        m_c =0.5833
+    elif m_c < 0.1708:
+        m_c = 0.1708
     return m_c
 
 
