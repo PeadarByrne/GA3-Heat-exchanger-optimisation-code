@@ -60,6 +60,7 @@ def A_sh(Y,nb,Lt):
     A_sh = d_sh*(Y - d_o)*(b/Y)   #flow area of fluid in shell inbetween baffles
     return A_sh
 
+#print(A_sh(1.6e-2,12,0.35))
 def pitch(pitch_shape):
     #input pitch shape as string description 'triangular' or 'square'
     if pitch_shape == 'triangular': #to give constants for triangular pitch shape

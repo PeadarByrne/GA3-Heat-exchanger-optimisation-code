@@ -17,7 +17,7 @@ def hydraulic_h(Lt,nt):
 
     counter =0
 
-    while(dm_h>dm_h_target):
+    while(dm_h>dm_h_target and counter<100):
         counter +=1
         m_h_old = m_h
 
@@ -55,14 +55,14 @@ def hydraulic_h(Lt,nt):
 
 def hydraulic_c(Lt,Y,nb,N,pitch_shape):
     m_c=0.5
-    dm_c_target=0.00001
+    dm_c_target=0.001
     dm_c=0.1
   
     c , a = fu.pitch(pitch_shape)
         
     A_sh = fu.A_sh(Y,nb,Lt) 
     counter =0
-    while(dm_c>dm_c_target):
+    while(dm_c>dm_c_target and counter<=10000):
         counter+=1
         m_c_old=m_c
         v_sh = fu.v_sh(m_c,A_sh)
@@ -77,6 +77,9 @@ def hydraulic_c(Lt,Y,nb,N,pitch_shape):
         m_c = -0.6221*p_cb**2 - 0.506*p_cb + 0.6463
         
         dm_c = abs(m_c-m_c_old)
+
+        if counter == 10000:
+            raise RuntimeError
 
     # check calculated m_c is within the limits of the pumps capabilities
     if m_c > 0.5833:
