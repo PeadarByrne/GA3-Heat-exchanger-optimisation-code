@@ -49,3 +49,12 @@ def CheckHoles(Y):
     holespace = Y - fu.d_o
     if holespace > fu.holespace_min:
         raise ValueError('Holes in the tube end plates are too close together')
+
+
+def CheckDesign(l,Lt,nt,nt_cross,Y,nb):
+    CheckHXlength(l)
+    CheckTubeLength(Lt,nt)
+    CheckTubesInShell(nt_cross,Y)
+    CheckMass(Lt,l,nt,nb)
+    CheckEnds(l,Lt)
+    CheckHoles(Y)
