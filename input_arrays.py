@@ -1,3 +1,4 @@
+import numpy as np
 #Contains the potential HX designs/layouts
 
 #string descriptions of pitch shape
@@ -17,3 +18,6 @@ lt_array = [0.243,0.243,0.243,0.243,0.243,0.21875,0.243,0.243,0.243,0.21875]
 
 #pitch spacings between centres
 Y_array = [1.67E-02,1.60E-02,1.22E-02,1.24E-02,1.07E-02,9.61E-03,2.13E-02,1.60E-02,1.17E-02,1.07E-02]
+
+#number of baffles
+b = np.linspace(0,20,21)
