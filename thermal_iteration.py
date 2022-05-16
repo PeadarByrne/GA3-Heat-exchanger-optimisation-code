@@ -116,6 +116,7 @@ def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
     Q = e_NTU*Q_max
     return e_NTU,Q
 
+'''
 e_NTU, Q_NTU = Thermal_NTU(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
 print("Effectiveness (NTU): {}".format(e_NTU))
 print("Q (NTU): {}".format(Q_NTU))
@@ -124,3 +125,4 @@ print("Q (NTU): {}".format(Q_NTU))
 e_LMTD,Q_LMTD = Thermal_LMTD(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
 print("Effectiveness (LMTD): {}".format(e_LMTD))
 print("Q (LMTD): {}".format(Q_LMTD))
+'''

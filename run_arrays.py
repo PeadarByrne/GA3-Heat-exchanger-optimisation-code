@@ -57,5 +57,5 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
     return e_LMTD_array,Q_LMTD_array,e_NTU_array,Q_NTU_array
 
     
-
+run_optimisation(input.shape_array,input.nt_array,input.nt_cross_array,input.l_array,input.lt_array,input.Y_array)
 
