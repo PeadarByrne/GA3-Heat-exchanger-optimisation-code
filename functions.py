@@ -114,6 +114,12 @@ def Re_sh(m_c,A_sh):
     return Re_sh
 
 def return_max(array):
+    # find the maximum value and its index in an array
     index = np.argmax(array)
     value = array[index]
     return index, value
+
+# def index_seperator(index,nt_array,b_array):
+#     # find the index for the number of tubes and baffles from the index of the max value
+#     sep= len(b_array)   #number of indexes before the next baffle index
+#     i_nt=np.floor(index/sep)

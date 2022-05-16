@@ -8,7 +8,7 @@ import input_arrays as input
 
 
 #Function runs simulations for geometries in input arrays
-def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array,b_array):
+def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array,nb_array):
     #check lengths of input arrays
     #check.CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array)
     #Initialise output arrays
@@ -31,8 +31,8 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
         #check design is legal
         #check.CheckDesign(l,lt,nt,nt_cross,Y,nb)
 
-        for j in range(len(b_array)):
-            nb = b_array[j]
+        for j in range(len(nb_array)):
+            nb = nb_array[j]
             m_c=hydro.hydraulic_c(lt,Y,nb,N,shape)  #run cold hydrualics function
             m_h=hydro.hydraulic_h(lt,nt)    #run hot hydraulics
             (e_LMTD,Q_LMTD) = thermal.Thermal_LMTD(m_h,m_c,nt,nb,Y,lt,shape)    #Run LMDT analysis
@@ -65,6 +65,6 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
     return e_LMTD_max ,Q_LMTD_max, e_NTU_max, Q_NTU_max #e_LMTD_array,Q_LMTD_array,e_NTU_array,Q_NTU_array
 
     
-e_LMTD_max, Q_LMTD_max, e_NTU_max, Q_NTU_max = run_optimisation(input.shape_array,input.nt_array,input.nt_cross_array,input.l_array,input.lt_array,input.Y_array,input.b_array)
+e_LMTD_max, Q_LMTD_max, e_NTU_max, Q_NTU_max = run_optimisation(input.shape_array,input.nt_array,input.nt_cross_array,input.l_array,input.lt_array,input.Y_array,input.nb_array)
 
 print(e_LMTD_max, Q_LMTD_max,e_NTU_max, Q_NTU_max)
