@@ -18,31 +18,42 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
     Q_NTU_array=[]
     x = 0
     length = len(shape_array)
-    while x >= length:
-        #find datapoints for current design
-        shape=shape_array[x]
-        nt=nt_array[x]
-        nt_cross=nt_cross_array[x]
-        l=l_array[x]
-        lt=lt_array[x]
-        Y=Y_array[x]
-        N=nt    #only valid for single pass
-        #check design is legl
-        check.CheckDesign(shape)
-        #run cold hydrualics function
-        m_c=hydro.hydraulic_c(lt,Y,nb,N,shape)
-        #run hot hydraulics
-        m_h=hydro.hydraulic_h(lt,nt)
-        #Run LMDT analysis
-        (e_LMTD,Q_LMTD) = thermal.Thermal_LMTD(m_h,m_c,nt,nb,Y,lt,shape)
-        #Run NTU analysis
-        (e_NTU,Q_NTU) = thermal.Thermal_NTU(m_h,m_c,nt,nb,Y,lt,shape)
-        #append results into output arrays
-        e_LMTD_array.append(e_LMTD)
-        Q_LMTD_array.append(Q_LMTD)
-        e_NTU_array.append(e_NTU)
-        Q_NTU_array.append(Q_NTU)
-        x+=1
+    #print(shape_array)
+    #print(length)
+    while x < length:
+        print(x)
+        try:
+            #find datapoints for current design
+            shape=shape_array[x]
+            nt=nt_array[x]
+            nt_cross=nt_cross_array[x]
+            l=l_array[x]
+            lt=lt_array[x]
+            Y=Y_array[x]
+            N=nt    #only valid for single pass
+            #add to counter
+            x+=1
+            #check design is legal
+            check.CheckDesign(l,lt,nt,nt_cross,Y,nb)
+            #run cold hydrualics function
+            m_c=hydro.hydraulic_c(lt,Y,nb,N,shape)
+            #run hot hydraulics
+            m_h=hydro.hydraulic_h(lt,nt)
+            #Run LMDT analysis
+            (e_LMTD,Q_LMTD) = thermal.Thermal_LMTD(m_h,m_c,nt,nb,Y,lt,shape)
+            #Run NTU analysis
+            (e_NTU,Q_NTU) = thermal.Thermal_NTU(m_h,m_c,nt,nb,Y,lt,shape)
+            #append results into output arrays
+            e_LMTD_array.append(e_LMTD)
+            Q_LMTD_array.append(Q_LMTD)
+            e_NTU_array.append(e_NTU)
+            Q_NTU_array.append(Q_NTU)
+        except ValueError:
+            e_LMTD_array.append('nope')
+            Q_LMTD_array.append('nope')
+            e_NTU_array.append('nope')
+            Q_NTU_array.append('nope')
+            
     
     #print results
     print('LMTD effectivenesses:')

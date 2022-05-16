@@ -49,7 +49,7 @@ def CheckEnds(l,Lt):
 #check closeness of holes in plates
 def CheckHoles(Y):
     holespace = Y - fu.d_o
-    if holespace > fu.holespace_min:
+    if holespace < fu.holespace_min:
         raise ValueError('Holes in the tube end plates are too close together')
 
 #Function to check all input arrays are equal length
