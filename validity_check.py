@@ -1,5 +1,7 @@
+from operator import length_hint
 from matplotlib.pyplot import vlines
 import functions as fu
+from input_arrays import Y_array
 
 #check total length of HX
 def CheckHXlength(l):
@@ -50,7 +52,22 @@ def CheckHoles(Y):
     if holespace > fu.holespace_min:
         raise ValueError('Holes in the tube end plates are too close together')
 
+#Function to check all input arrays are equal length
+def CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array):
+    length = len(shape_array)
+    if length != len(nt_array):
+        raise ValueError('nt_array is not the same length as shape_array')
+    if length != len(nt_cross_array):
+        raise ValueError('nt_cross_array is not the same length as shape_array')
+    if length != len(l_array):
+        raise ValueError('nt_array is not the same length as shape_array')
+    if length != len(lt_array):
+        raise ValueError('lt_array is not the same length as shape_array')
+    if length != len(Y_array):
+        raise ValueError('Y_array is not the same length as shape_array')
 
+
+#Function that runs all checks
 def CheckDesign(l,Lt,nt,nt_cross,Y,nb):
     CheckHXlength(l)
     CheckTubeLength(Lt,nt)
@@ -58,3 +75,4 @@ def CheckDesign(l,Lt,nt,nt_cross,Y,nb):
     CheckMass(Lt,l,nt,nb)
     CheckEnds(l,Lt)
     CheckHoles(Y)
+    CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array)
