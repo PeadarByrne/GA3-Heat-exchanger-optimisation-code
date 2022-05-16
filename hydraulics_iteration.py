@@ -11,13 +11,13 @@ import numpy as np
 def hydraulic_h(Lt,nt):
     #Guess mh
     m_h=0.5
-    dm_h_target=0.00001
+    dm_h_target=0.0001
     dm_h=1
     sigma=fu.sigma(nt)
 
     counter =0
 
-    while(dm_h>dm_h_target and counter<100):
+    while(dm_h>dm_h_target and counter<10000):
         counter +=1
         m_h_old = m_h
 
@@ -42,6 +42,8 @@ def hydraulic_h(Lt,nt):
         m_h = (-0.3086*p_hb**2 -0.6567*p_hb + 0.5493)*fu.rho*1e-3   #regression function from excel spreadsheet correlating the pressure drop across the pump to mass flow
 
         dm_h=abs(m_h-m_h_old)
+        if counter == 10000:
+            raise RuntimeError
 
     # check calculated m_h is within the limits of the pumps capabilities
     if m_h > 0.4583:
@@ -55,8 +57,9 @@ def hydraulic_h(Lt,nt):
 
 def hydraulic_c(Lt,Y,nb,N,pitch_shape):
     m_c=0.5
-    dm_c_target=0.001
-    dm_c=0.1
+    m_c_old=m_c
+    dm_c_target=0.0001
+    dm_c=1
   
     c , a = fu.pitch(pitch_shape)
         
@@ -64,7 +67,7 @@ def hydraulic_c(Lt,Y,nb,N,pitch_shape):
     counter =0
     while(dm_c>dm_c_target and counter<=10000):
         counter+=1
-        m_c_old=m_c
+        m_c_old = m_c
         v_sh = fu.v_sh(m_c,A_sh)
         Re_sh = fu.Re_sh(m_c,A_sh)
         vn_c = fu.v_n(m_c)
@@ -75,9 +78,9 @@ def hydraulic_c(Lt,Y,nb,N,pitch_shape):
 
         p_cb = p_c/1e5
         m_c = -0.6221*p_cb**2 - 0.506*p_cb + 0.6463
-        
+        dm_c = m_c-m_c_old
         dm_c = abs(m_c-m_c_old)
-
+        
         if counter == 10000:
             raise RuntimeError
 
