@@ -1,8 +1,9 @@
 from numpy import append
 import functions as fu
 import validity_check as check
-import thermal_iteration as thermal
-import hydraulics_iteration as hydro
+# import thermal_iteration as thermal
+# import hydraulics_iteration as hydro
+import single_HX_calculation as HXcalc
 import input_arrays as input
 
 
@@ -35,11 +36,8 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
 
             #check design is legal
             #check.CheckDesign(l,lt,nt,nt_cross,Y,nb)
-            
-            m_c=hydro.hydraulic_c(lt,Y,nb,N,shape)  #run cold hydrualics function
-            m_h=hydro.hydraulic_h(lt,nt)    #run hot hydraulics
-            (e_LMTD,Q_LMTD) = thermal.Thermal_LMTD(m_h,m_c,nt,nb,Y,lt,shape)    #Run LMDT analysis
-            (e_NTU,Q_NTU) = thermal.Thermal_NTU(m_h,m_c,nt,nb,Y,lt,shape)   #Run NTU analysis
+
+            e_LMTD , Q_LMTD, e_NTU, Q_NTU = HXcalc.HX_analysis(nt,nb,N,Y,lt,shape)
             #append results into output arrays
             e_LMTD_array.append(e_LMTD)
             Q_LMTD_array.append(Q_LMTD)
