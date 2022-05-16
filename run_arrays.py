@@ -21,7 +21,7 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
     #print(shape_array)
     #print(length)
     while x < length:
-        print(x)
+        #print(x)
         try:
             #find datapoints for current design
             shape=shape_array[x]
