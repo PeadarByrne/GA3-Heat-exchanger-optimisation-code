@@ -112,3 +112,8 @@ def Re_sh(m_c,A_sh):
     v_sh=m_c/(rho*A_sh)
     Re_sh=(v_sh*d_o/nu)
     return Re_sh
+
+def return_max(array):
+    index = np.argmax(array)
+    value = array[index]
+    return index, value

@@ -75,7 +75,7 @@ def hydraulic_c(Lt,Y,nb,N,pitch_shape):
 
         p_cb = p_c/1e5
         m_c = -0.6221*p_cb**2 - 0.506*p_cb + 0.6463
-        print(m_c)
+        
         dm_c = abs(m_c-m_c_old)
 
     # check calculated m_c is within the limits of the pumps capabilities

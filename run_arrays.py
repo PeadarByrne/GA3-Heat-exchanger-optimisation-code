@@ -47,20 +47,24 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
         #     Q_LMTD_array.append('nope')
         #     e_NTU_array.append('nope')
         #     Q_NTU_array.append('nope')
-        
-    
+    index_LMTD, e_LMTD_max = fu.return_max(e_LMTD_array)  
+    Q_LMTD_max = Q_LMTD_array[index_LMTD] 
+    index_NTU, e_NTU_max = fu.return_max(e_NTU_array)  
+    Q_NTU_max = Q_NTU_array[index_NTU] 
+    #print(shape(e_LMTD_max))
     #print results
-    print('LMTD effectivenesses:')
-    print(e_LMTD_array)
-    print('LMTD heat transfer rates:')
-    print(Q_LMTD_array)
-    print('NTU effectivenesses:')
-    print(e_NTU_array)
-    print('NTU heat transfer rates')
-    print(Q_NTU_array)
+    # print('LMTD effectivenesses:')
+    # print(e_LMTD_array)
+    # print('LMTD heat transfer rates:')
+    # print(Q_LMTD_array)
+    # print('NTU effectivenesses:')
+    # print(e_NTU_array)
+    # print('NTU heat transfer rates')
+    # print(Q_NTU_array)
 
-    return e_LMTD_array,Q_LMTD_array,e_NTU_array,Q_NTU_array
+    return e_LMTD_max ,Q_LMTD_max, e_NTU_max, Q_NTU_max #e_LMTD_array,Q_LMTD_array,e_NTU_array,Q_NTU_array
 
     
-run_optimisation(input.shape_array,input.nt_array,input.nt_cross_array,input.l_array,input.lt_array,input.Y_array,input.b_array)
+e_LMTD_max, Q_LMTD_max, e_NTU_max, Q_NTU_max = run_optimisation(input.shape_array,input.nt_array,input.nt_cross_array,input.l_array,input.lt_array,input.Y_array,input.b_array)
 
+print(e_LMTD_max, Q_LMTD_max,e_NTU_max, Q_NTU_max)
