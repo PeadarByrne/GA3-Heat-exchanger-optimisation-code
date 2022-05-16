@@ -10,7 +10,7 @@ nb = 9  #number of baffles
 #Function runs simulations for geometries in input arrays
 def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array):
     #check lengths of input arrays
-    check.CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array)
+    #check.CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array)
     #Initialise output arrays
     e_LMTD_array=[]
     Q_LMTD_array=[]
@@ -34,7 +34,7 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
             #add to counter
             x+=1
             #check design is legal
-            check.CheckDesign(l,lt,nt,nt_cross,Y,nb)
+            #check.CheckDesign(l,lt,nt,nt_cross,Y,nb)
             #run cold hydrualics function
             m_c=hydro.hydraulic_c(lt,Y,nb,N,shape)
             #run hot hydraulics
