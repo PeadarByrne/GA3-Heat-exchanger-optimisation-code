@@ -34,4 +34,4 @@ lt_array = lt_array_calc(nt_array)
 Y_array = [1.67E-02,1.60E-02,1.22E-02,1.24E-02,1.07E-02,9.61E-03,2.13E-02,1.60E-02,1.17E-02,1.07E-02]
 
 #number of baffles
-nb_array = np.arange(0,12,1)
+nb_array = np.arange(0,5,1)

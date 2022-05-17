@@ -72,7 +72,7 @@ def hydraulic_c(Lt,Y,nb,N,pitch_shape):
         Re_sh = fu.Re_sh(m_c,A_sh)
         vn_c = fu.v_n(m_c)
 
-        p_sh = 4*a*Re_sh**-0.15*N*fu.rho*v_sh**2 #Shell side pressure loss (This has poor validity)
+        p_sh = 4*a*Re_sh**-0.15*N*fu.rho*v_sh**2*(nb+1) #Shell side pressure loss (This has poor validity)
         p_n = 0.5*fu.rho*vn_c**2
         p_c = p_sh + p_n
 

@@ -62,6 +62,7 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
     # print(e_NTU_array)
     # print('NTU heat transfer rates')
     # print(Q_NTU_array)
+    
     i_nt, i_nb =fu.index_seperator(index_LMTD,nt_array,nb_array)
     if i_nt>5:
         shape = "triangle"
