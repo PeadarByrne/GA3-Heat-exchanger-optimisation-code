@@ -61,7 +61,7 @@ def A_sh(Y,nb,Lt):
     A_sh = d_sh*(Y - d_o)*(b/Y)   #flow area of fluid in shell inbetween baffles
     return A_sh
 
-#print(A_sh(1.6e-2,12,0.35))
+
 def pitch(pitch_shape):
     #input pitch shape as string description 'triangular' or 'square'
     if pitch_shape == 'triangular': #to give constants for triangular pitch shape
@@ -72,8 +72,6 @@ def pitch(pitch_shape):
         c=0.15
         a=0.34
         return c,a
-
-
 
 
 def m_t(m_h,nt):
@@ -88,6 +86,16 @@ def v_t(m_h,nt):
     m_t = m_h/nt
     v_t = m_t/(rho*A(d_i))
     return  v_t
+
+# def pump_p_c(m):
+#     p_c = -.7843*m**2 - 0.4802*m + 0.6598
+#     return p_c
+# def der_pump_p_c(m):
+#     dp_c = -.7843*m - 0.4802
+#     return dp_c
+# def pump_m_c(p):
+#     m_c = -0.6221*p**2 - 0.506*p + 0.6463
+#     return m_c
 
 def Re_t(m_h,nt):
     #calculate Reynolds from mass flow rate
