@@ -18,6 +18,8 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
     e_NTU_array=[]
     Q_NTU_array=[]
 
+    i_count=0
+    j_count=0
 
     for i in range(len(shape_array)):
         #find datapoints for current design
@@ -35,19 +37,25 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
             nb = nb_array[j]
 
             #check design is legal
-            #check.CheckDesign(l,lt,nt,nt_cross,Y,nb)
+            try:
 
-            e_LMTD , Q_LMTD, e_NTU, Q_NTU = HXcalc.HX_analysis(nt,nb,N,Y,lt,shape)
-            #append results into output arrays
-            e_LMTD_array.append(e_LMTD)
-            Q_LMTD_array.append(Q_LMTD)
-            e_NTU_array.append(e_NTU)
-            Q_NTU_array.append(Q_NTU)
-        # except ValueError:
-        #     e_LMTD_array.append('nope')
-        #     Q_LMTD_array.append('nope')
-        #     e_NTU_array.append('nope')
-        #     Q_NTU_array.append('nope')
+                check.CheckDesign(l,lt,nt,nt_cross,Y,nb)
+
+                e_LMTD , Q_LMTD, e_NTU, Q_NTU = HXcalc.HX_analysis(nt,nb,N,Y,lt,shape)
+                #append results into output arrays
+                e_LMTD_array.append(e_LMTD)
+                Q_LMTD_array.append(Q_LMTD)
+                e_NTU_array.append(e_NTU)
+                Q_NTU_array.append(Q_NTU)
+            except ValueError:
+                e_LMTD_array.append('nope')
+                Q_LMTD_array.append('nope')
+                e_NTU_array.append('nope')
+                Q_NTU_array.append('nope')
+                print('i=',i,' j=',j)
+
+            j_count+=1
+        i_count+=1
     index_LMTD, e_LMTD_max = fu.return_max(e_LMTD_array)  
     Q_LMTD_max = Q_LMTD_array[index_LMTD] 
     index_NTU, e_NTU_max = fu.return_max(e_NTU_array)  
