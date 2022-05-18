@@ -6,6 +6,7 @@ from input_arrays import Y_array
 #check total length of HX
 def CheckHXlength(l):
     if l > fu.l_max:
+        print('HX length too big')
         raise ValueError('The heat exchanger is too long')
 
 
@@ -13,6 +14,7 @@ def CheckHXlength(l):
 def CheckTubeLength(Lt,nt):
     Lt_used = (Lt + fu.Lt_extra) * nt
     if Lt_used > fu.Lt_total:
+        print('Tube length too big')
         raise ValueError('This design uses too much copper pipe')
 
 
@@ -20,6 +22,7 @@ def CheckTubeLength(Lt,nt):
 def CheckTubesInShell(nt_cross,Y):
     d_t_total = (nt_cross +1)*Y
     if d_t_total > fu.d_sh:
+        print('Tubes dont fit inside shell')
         raise ValueError('The pipes do not fit in the shell')
 
 
@@ -37,12 +40,14 @@ def CheckMass(Lt,l,nt,nb):
     #total mass of the heat exchanger
     mass_total = mass_tubes+mass_shell+mass_nozz+mass_plates+mass_baffles
     if mass_total > fu.mass_limit:
+        print('Design is overweight')
         raise ValueError('This design is overweight')
 
 #check end chamber room/space for end nozzles
 def CheckEnds(l,Lt):
     l_endspace = (l-Lt)/2 #length of end chambers
     if l_endspace < fu.l_endspace_min:
+        print('Does not allow sufficient spaces for nozzles at either end')
         raise ValueError('Does not allow sufficient spaces for nozzles at either end')
 
 
@@ -50,20 +55,26 @@ def CheckEnds(l,Lt):
 def CheckHoles(Y):
     holespace = Y - fu.d_o
     if holespace < fu.holespace_min:
+        print('Holes in the tube end plates are too close together')
         raise ValueError('Holes in the tube end plates are too close together')
 
 #Function to check all input arrays are equal length
 def CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array):
     length = len(shape_array)
     if length != len(nt_array):
+        print('nt_array is not the same length as shape_array')
         raise ValueError('nt_array is not the same length as shape_array')
     if length != len(nt_cross_array):
+        print('nt_cross_array is not the same length as shape_array')
         raise ValueError('nt_cross_array is not the same length as shape_array')
     if length != len(l_array):
+        print('nt_array is not the same length as shape_array')
         raise ValueError('nt_array is not the same length as shape_array')
     if length != len(lt_array):
+        print('lt_array is not the same length as shape_array')
         raise ValueError('lt_array is not the same length as shape_array')
     if length != len(Y_array):
+        print('Y_array is not the same length as shape_array')
         raise ValueError('Y_array is not the same length as shape_array')
 
 
