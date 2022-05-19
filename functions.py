@@ -93,7 +93,7 @@ def Re_t(m_h,nt):
     #calculate Reynolds from mass flow rate
     m_t = m_h/nt
     v_t = m_t/(rho*A(d_i))
-    Re_t=(v_t*d_i/nu)
+    Re_t=(v_t*d_i)/nu
     return Re_t
 
 def v_n(m):

@@ -53,12 +53,13 @@ def hydraulic_h(Lt,nt):
       
         if counter == 100:
             raise RuntimeError
-    print(counter)
+    #print(counter)
+
     # calculated m_h is within the limits of the pumps capabilities
-    if m_h > 0.4583:    #Pump becomes unstead operating beyond this point
-        raise ValueError('outside the pumps performance limits')
-    elif m_h < 0:
-        raise ValueError('outside the pumps performance limits')
+    # if m_h > 0.4583:    #Pump becomes unstead operating beyond this point
+    #     raise ValueError('outside the pumps performance limits')
+    # elif m_h < 0:
+    #     raise ValueError('outside the pumps performance limits')
     return m_h    
 
 #------Coldside analysis
@@ -75,7 +76,7 @@ def hydraulic_c(Lt,Y,nb,N,pitch_shape):
     A_sh = fu.A_sh(Y,nb,Lt) 
     counter =0
 
-    while(abs(e)>e_c_target and counter<=20):
+    while(abs(e)>e_c_target and counter<=100):
 
         counter+=1
         #calculate pressure drop from guessed m_c
@@ -98,23 +99,23 @@ def hydraulic_c(Lt,Y,nb,N,pitch_shape):
         e = p_c_pump - p_c_calc #calculate error
         p_calc_old = p_c_calc   #store previosly calculated pressure for next iteration
       
-        if counter == 20:
+        if counter == 100:
             raise RuntimeError
-    print(counter)
+    #print(counter)
 
     # check calculated m_c is within the limits of the pumps capabilities
-    if m_c > 0.5833:    #Pump becomes unstead operating beyond this point
-        raise ValueError('outside the pumps performance limits')
-    elif m_c < 0:
-        raise ValueError('outside the pumps performance limits')
+    # if m_c > 0.5833:    #Pump becomes unstead operating beyond this point
+    #     raise ValueError('outside the pumps performance limits')
+    # elif m_c < 0:
+    #     raise ValueError('outside the pumps performance limits')
     return m_c
 
 
 
 # #---------calculate massflow rates
-m_c = hydraulic_c(350e-3,14e-3,9,13,'square')
-print("coldside mass flow rate: {}".format(m_c))
-m_h = hydraulic_h(350e-3,13)
-print("hotside mass flow rate: {}".format(m_h))
+# m_c = hydraulic_c(350e-3,14e-3,9,13,'square')
+# print("coldside mass flow rate: {}".format(m_c))
+# m_h = hydraulic_h(350e-3,13)
+# print("hotside mass flow rate: {}".format(m_h))
 
 

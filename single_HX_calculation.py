@@ -10,8 +10,8 @@ def HX_analysis(nt,nb,N,Y,lt,shape):
 
     return e_LMTD , Q_LMTD, e_NTU, Q_NTU
 
-# e_LMTD , Q_LMTD, e_NTU, Q_NTU =HX_analysis(13, 9, 13, 14e-3, 350e-3,'square')
-# print(e_LMTD , Q_LMTD, e_NTU, Q_NTU)
+e_LMTD , Q_LMTD, e_NTU, Q_NTU =HX_analysis(22, 20, 13, 14e-3, 350e-3,'square')
+print(e_LMTD , Q_LMTD, e_NTU, Q_NTU)
 
 
 

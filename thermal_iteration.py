@@ -32,14 +32,15 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
     #Water out estimates
     T_h_out=55.27
     T_c_out=24.05
+    T_c_out_old = T_c_out
+    T_h_out_old = T_h_out   #keep the old values to see if values have converged enough
+       
 
     #set up counter to check if stuff is broken
     counter = 0
     while (dT_c>dT_target) or (dT_h>dT_target):
         counter += 1
 
-        T_c_out_old = T_c_out
-        T_h_out_old = T_h_out   #keep the old values to see if values have converged enough
         '''
         #find new correction factor F, only for more than one tube pass
         R_corr = (T_c_in - T_c_out)/(T_h_out - T_h_in)
@@ -50,9 +51,15 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
         delta_T_lm = ((fu.T_h_in-T_c_out)-(T_h_out-fu.T_c_in))/(np.log((fu.T_h_in-T_c_out)/(T_h_out-fu.T_c_in)))
         T_c_out = ((F * U * A_i * delta_T_lm)+(fu.T_c_in * m_c * fu.Cp))/(m_c*fu.Cp)     #finds new cold output temp
         T_h_out = (-(F * U * A_i * delta_T_lm)+(fu.T_h_in * m_h * fu.Cp))/(m_h*fu.Cp)    #finds new hot output temp
-        dT_c = abs(T_c_out-T_c_out_old)     #finds cahnge in estimated cold output temp
-        dT_h = abs(T_h_out-T_h_out_old)     #finds cahnge in estimated hot output temp
-    
+        dT_c = abs(T_c_out-T_c_out_old)     #finds change in estimated cold output temp
+        dT_h = abs(T_h_out-T_h_out_old)     #finds change in estimated hot output temp
+        T_c_out_old = T_c_out
+        T_h_out_old = T_h_out   #store the old values 
+        T_h_out = 0.5*T_h_out + 0.5*T_h_out_old #weighted average for new value
+        T_c_out = 0.5*T_c_out + 0.5*T_c_out_old
+        #print(counter)
+        
+
     Q = U*A_i*F*delta_T_lm      #rate of heat transfer
     mc_c = m_c*fu.Cp  
     mc_h = m_h*fu.Cp
@@ -84,6 +91,7 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
     print('R = ',R)
     print('P = ',P)   
     '''
+
     return e,Q
 
 
@@ -121,7 +129,7 @@ def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
 # print("Effectiveness (NTU): {}".format(e_NTU))
 # print("Q (NTU): {}".format(Q_NTU))
 
-# #m_h, m_c, nt, nb, Y, Lt, pitch_shape
+# #function inputs: m_h, m_c, nt, nb, Y, Lt, pitch_shape
 # e_LMTD,Q_LMTD = Thermal_LMTD(hydro.m_h,hydro.m_c, 13, 9, 14e-3, 350e-3, 'square')
 # print("Effectiveness (LMTD): {}".format(e_LMTD))
 # print("Q (LMTD): {}".format(Q_LMTD))
