@@ -78,24 +78,16 @@ def m_t(m_h,nt):
     m_t = m_h/nt
     return m_t
 
-def m_L(m):
-    #convert kg/s to litres/second
-    return m/rho
+# def m_L(m):
+#     #convert kg/s to litres/second
+#     ml =m*(rho/1000)
+#     return ml
 def v_t(m_h,nt):
     #m_t = m_t(m_h)
     m_t = m_h/nt
     v_t = m_t/(rho*A(d_i))
     return  v_t
 
-# def pump_p_c(m):
-#     p_c = -.7843*m**2 - 0.4802*m + 0.6598
-#     return p_c
-# def der_pump_p_c(m):
-#     dp_c = -.7843*m - 0.4802
-#     return dp_c
-# def pump_m_c(p):
-#     m_c = -0.6221*p**2 - 0.506*p + 0.6463
-#     return m_c
 
 def Re_t(m_h,nt):
     #calculate Reynolds from mass flow rate

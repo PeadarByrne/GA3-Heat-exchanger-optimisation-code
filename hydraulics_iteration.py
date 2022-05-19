@@ -58,44 +58,47 @@ def hydraulic_h(Lt,nt):
 
 def hydraulic_c(Lt,Y,nb,N,pitch_shape):
     m_c=0.4
+    m_c_old =0
+    p_calc_old =0
     e_c_target=0.0001
     e=1
   
-    c , a = fu.pitch(pitch_shape)
-        
+    c , a = fu.pitch(pitch_shape) 
     A_sh = fu.A_sh(Y,nb,Lt) 
     counter =0
-    while(abs(e)>e_c_target and counter<=1000):
-        counter+=1
-        m_c_old = m_c
 
+    while(abs(e)>e_c_target and counter<=20):
+
+        counter+=1
         #calculate pressure drop from input m_c
         v_sh = fu.v_sh(m_c,A_sh) 
         Re_sh = fu.Re_sh(m_c,A_sh)
         vn_c = fu.v_n(m_c)
         p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb + 1) #Shell side pressure loss (This has poor validity)
         p_n = 0.5*fu.rho*vn_c**2
-        p_c_guess = p_sh + p_n    #calculated pressure from m_c guess
-        p_cb_guess = p_c_guess/1e5  #convert pressure to bar
-
-        #new iterator
-        # #calculate the pressure loss associated with the pump for this pressure loss
-        # m_cl= fu.m_L(m_c)    #convert kg/s to l/s
-        # p_cb_pump = -.7843*m_cl**2 - 0.4802*m_cl + 0.6598   #pump pressure in bar
-
-        # e = p_cb_pump - p_cb_guess  #error in bar
-        # print(e,m_c)
+        p_c = p_sh + p_n    #calculated pressure from m_c guess
+        p_c_calc = p_c/1e5  #convert pressure to bar
         
-        # de = -1.5686*m_cl - 0.4802
-        # m_c = m_c  - e/de
+   
 
-        #old iterator
-        m_c = -0.6221*p_cb_guess**2 - 0.506*p_cb_guess + 0.6463
-        e = abs(m_c-m_c_old)
-        m_c = 0.5*(m_c_old + m_c)
+        dp_calc = (p_c_calc - p_calc_old)/(m_c - m_c_old) #Calculate an approximate derivative of p_calc 
+        m_c_old = m_c   #store m_c from previous guess
+        m_cl =(fu.rho/1000)*m_c #convert to litres/s
+        p_c_pump = -.7843*m_cl**2 - 0.4802*m_cl + 0.6598
+        dp_c_pump = -2*.7843*m_cl - 0.4802
+        m_c = m_c - (p_c_pump - p_c_calc)/(dp_c_pump - dp_calc)    #calculate new mass flow using newton raphson iteration
+        e = p_c_pump - p_c_calc #calculate error
+        p_calc_old = p_c_calc   #store previosly calculated pressure for next iteration
+
+        # m_c_old = m_c 
+        # de = dp_pump(m_c) - dp_calc
+        # m_c = m_c - e_func(m_c,p_c_calc)/de
+        # e = e_func(m_c,p_c_calc)
+        # p_calc_old = p_c_calc
+
         
 
-        if counter == 1000:
+        if counter == 20:
             raise RuntimeError
     print(counter)
 
