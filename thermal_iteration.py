@@ -10,7 +10,7 @@ m_h = 0.48     #example value of hot water mass flow rate
 '''
    
 
-def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt):
+def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     #Find Reynolds numbers
     Re_i = fu.Re_t(m_h,nt)
     A_sh = fu.A_sh(Y,nb,Lt) 
@@ -43,13 +43,21 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt):
     while (dT_c>dT_target) or (dT_h>dT_target):
         counter += 1
 
-        '''
-        #find new correction factor F, only for more than one tube pass
-        R_corr = (T_c_in - T_c_out)/(T_h_out - T_h_in)
-        P_corr = (T_h_out - T_h_in)/(T_c_in-T_h_in)
-        F = something
-        '''
-        F = 1 #works for one tube pass, more gets complicated
+        if (Nt==1) and (Ns==1): #one shell one pass
+            F = 1
+                    
+        elif Nt > 1: # if we have more than 1 tube pass, need F
+            R = (fu.T_h_in-T_h_out)/(T_c_out-fu.T_c_in)
+            P = (T_c_out-fu.T_c_in)/(fu.T_h_in-fu.T_c_in)
+
+            if R!= 1:
+                W = ((1-P*R)/(1-P))**(1/Ns)
+                S = ((R**2 +1)**0.5)/(R-1)
+                F = (S*np.log(W))/np.log((1+W-S+S*W)/(1+W+S-(S*W)))
+            elif R==1: #must take Ns=1
+                W_dash = (Ns - Ns*P)/(Ns-Ns*P+P)
+                F = np.sqrt(2)*((1-W_dash)/W_dash)/np.log(((W_dash/(1-W_dash))+(1/np.sqrt(2)))/((W_dash/(1-W_dash))-(1/np.sqrt(2))))
+
         delta_T_lm = ((fu.T_h_in-T_c_out)-(T_h_out-fu.T_c_in))/(np.log((fu.T_h_in-T_c_out)/(T_h_out-fu.T_c_in)))
         T_c_out = ((F * U * A_i * delta_T_lm)+(fu.T_c_in * m_c * fu.Cp))/(m_c*fu.Cp)     #finds new cold output temp
         T_h_out = (-(F * U * A_i * delta_T_lm)+(fu.T_h_in * m_h * fu.Cp))/(m_h*fu.Cp)    #finds new hot output temp
@@ -61,7 +69,6 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt):
         T_c_out = 0.5*T_c_out + 0.5*T_c_out_old
         #print(counter)
         
-
     Q = U*A_i*F*delta_T_lm      #rate of heat transfer
     mc_c = m_c*fu.Cp  
     mc_h = m_h*fu.Cp

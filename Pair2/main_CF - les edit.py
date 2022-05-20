@@ -336,7 +336,7 @@ def calc_LMTD():
             Q2 = m_h*cp*(Th_in-Th_out)
 
             if (Nt ==1) and (Ns==1): #one shell one pass
-                Q3 = UA* deltaT_lm 
+                F = 1
                 
             elif Nt > 1: # if we have more than 1 tube pass, need F
                 R = (Th_in-Th_out)/(Tc_out-Tc_in)
@@ -350,7 +350,7 @@ def calc_LMTD():
                     W_dash = (Ns - Ns*P)/(Ns-Ns*P+P)
                     F = np.sqrt(2)*((1-W_dash)/W_dash)/np.log(((W_dash/(1-W_dash))+(1/np.sqrt(2)))/((W_dash/(1-W_dash))-(1/np.sqrt(2))))
 
-                Q3= UA*F* deltaT_lm 
+            Q3= UA*F* deltaT_lm 
 
             tot_error = abs(Q1-Q3) + abs(Q1-Q2) + abs(Q2 - Q3)
 
