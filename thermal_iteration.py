@@ -57,7 +57,7 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
             elif R==1: #must take Ns=1
                 W_dash = (Ns - Ns*P)/(Ns-Ns*P+P)
                 F = np.sqrt(2)*((1-W_dash)/W_dash)/np.log(((W_dash/(1-W_dash))+(1/np.sqrt(2)))/((W_dash/(1-W_dash))-(1/np.sqrt(2))))
-
+        
         delta_T_lm = ((fu.T_h_in-T_c_out)-(T_h_out-fu.T_c_in))/(np.log((fu.T_h_in-T_c_out)/(T_h_out-fu.T_c_in)))
         T_c_out = ((F * U * A_i * delta_T_lm)+(fu.T_c_in * m_c * fu.Cp))/(m_c*fu.Cp)     #finds new cold output temp
         T_h_out = (-(F * U * A_i * delta_T_lm)+(fu.T_h_in * m_h * fu.Cp))/(m_h*fu.Cp)    #finds new hot output temp
@@ -69,6 +69,8 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
         T_c_out = 0.5*T_c_out + 0.5*T_c_out_old
         #print(counter)
         
+    print("Correction factor:", F)
+
     Q = U*A_i*F*delta_T_lm      #rate of heat transfer
     mc_c = m_c*fu.Cp  
     mc_h = m_h*fu.Cp

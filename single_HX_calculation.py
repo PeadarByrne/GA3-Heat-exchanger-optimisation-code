@@ -17,7 +17,7 @@ def HX_analysis(nt,nb,Nt,Ns):
 
     return e_LMTD , Q_LMTD, e_NTU, Q_NTU
 
-e_LMTD , Q_LMTD, e_NTU, Q_NTU =HX_analysis(22, 20, 2, 1)
+e_LMTD , Q_LMTD, e_NTU, Q_NTU =HX_analysis(22, 20, 2, 2)
 print(e_LMTD , Q_LMTD, e_NTU, Q_NTU)
 
 
