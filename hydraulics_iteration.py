@@ -8,7 +8,7 @@ import numpy as np
 
 
 
-def hydraulic_h(Lt,nt):
+def hydraulic_h(Lt,nt,Nt):
     #Guess mh
     m_h=0.5
     m_h_old = 0
@@ -65,13 +65,15 @@ def hydraulic_h(Lt,nt):
 #------Coldside analysis
 
 
-def hydraulic_c(Lt,Y,nb,N,pitch_shape):
+def hydraulic_c(Lt,Y,nb,N):
     m_c=0.4
     m_c_old =0
     p_calc_old =0
     e_c_target=0.0001
     e=1
-  
+    
+    pitch_shape = "triangular"
+
     c , a = fu.pitch(pitch_shape) 
     A_sh = fu.A_sh(Y,nb,Lt) 
     counter =0

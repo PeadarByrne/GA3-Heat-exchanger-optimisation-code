@@ -10,11 +10,13 @@ m_h = 0.48     #example value of hot water mass flow rate
 '''
    
 
-def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
+def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt):
     #Find Reynolds numbers
     Re_i = fu.Re_t(m_h,nt)
     A_sh = fu.A_sh(Y,nb,Lt) 
     Re_o = fu.Re_sh(m_c,A_sh)
+
+    pitch_shape = "triangular"
 
     c , a = fu.pitch(pitch_shape)
 
@@ -96,10 +98,12 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
 
 
 
-def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt, pitch_shape):
+def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt):
     Re_i = fu.Re_t(m_h,nt)
     A_sh = fu.A_sh(Y,nb,Lt) 
     Re_o = fu.Re_sh(m_c,A_sh)
+
+    pitch_shape = "triangular"
 
     c , a = fu.pitch(pitch_shape)
 
