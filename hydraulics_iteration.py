@@ -1,5 +1,6 @@
 import functions as fu
 import numpy as np
+import math
 
 
 #------Hotside analysis
@@ -36,10 +37,19 @@ def hydraulic_h(Lt,nt,Nt):
         p_t = f*(Lt/fu.d_i)*0.5*fu.rho*v_t**2     #pressure loss along copper tubes from friction
         kc = -0.3952*sigma + 0.4973                  #regression functions from excel for Re=10000 for turbulent flow
         ke = 0.9773*sigma**2 -2.0738*sigma + 0.9983  
-        p_e = 0.5*fu.rho*v_t**2*(kc + ke)            #pressure loss caused by entrance exit losses into copper tubes
+        p_e = 0.5*fu.rho*v_t**2*(kc + ke)*Nt            #pressure loss caused by entrance exit losses into copper tubes - updated with Nt
         p_n = 0.5*fu.rho*v_nh**2    # pressure loss from nozzles entering HX
 
-        p_h = p_t + p_e + p_n   #pressure in pascals
+        header_gap = 0.03   #needs changing
+
+        if Nt == 1:
+            p_hturn = 0
+        elif Nt == 2:
+            area_ratio = (nt*0.5*math.pi*(fu.d_i/2)**2)/(header_gap*fu.d_sh)
+            v_header = area_ratio * v_t
+            p_hturn = 0.5*fu.rho*(v_header**2)
+
+        p_h = p_t + p_e + p_n + p_hturn  #pressure in pascals
         p_h_calc = p_h/1e5          #pressure in bar
 
         #m_h = (-0.3086*p_hb**2 -0.6567*p_hb + 0.5493)*fu.rho*1e-3   #regression function from excel spreadsheet correlating the pressure drop across the pump to mass flow
