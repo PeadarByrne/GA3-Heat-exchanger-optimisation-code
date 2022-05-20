@@ -38,6 +38,7 @@ def hydraulic_h(Lt,nt,Nt):
         ke = 0.9773*sigma**2 -2.0738*sigma + 0.9983  
         p_e = 0.5*fu.rho*v_t**2*(kc + ke)            #pressure loss caused by entrance exit losses into copper tubes
         p_n = 0.5*fu.rho*v_nh**2    # pressure loss from nozzles entering HX
+
         p_h = p_t + p_e + p_n   #pressure in pascals
         p_h_calc = p_h/1e5          #pressure in bar
 
@@ -65,7 +66,7 @@ def hydraulic_h(Lt,nt,Nt):
 #------Coldside analysis
 
 
-def hydraulic_c(Lt,Y,nb,N):
+def hydraulic_c(Lt,Y,nb,N,Ns):
     m_c=0.4
     m_c_old =0
     p_calc_old =0
@@ -87,10 +88,10 @@ def hydraulic_c(Lt,Y,nb,N):
         vn_c = fu.v_n(m_c)
         p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb + 1) #Shell side pressure loss (This has poor validity)
         p_n = 0.5*fu.rho*vn_c**2
-        p_c = p_sh + p_n    #calculated pressure from m_c guess
+        p_turn = 0.5*fu.rho*(v_sh**2)*Ns*nb                 #turning pressure loss
+        p_c = p_sh + p_n + p_turn   #calculated pressure from m_c guess
         p_c_calc = p_c/1e5  #convert pressure to bar
         
-   
 
         dp_calc = (p_c_calc - p_calc_old)/(m_c - m_c_old) #Calculate an approximate derivative of p_calc 
         m_c_old = m_c   #store m_c from previous guess
