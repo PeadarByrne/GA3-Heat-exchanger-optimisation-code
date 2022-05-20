@@ -204,7 +204,7 @@ elif  Nt%2 ==1: # we have odd number of passes, hence need both header tanks to 
 #total mass of acrylic
 rho_sh=0.650
 hole_nozzle_d = 0.025 #25mm in moodle example design, but 24.5 in handout
-m_acrylic = (np.pi * 0.25*(D_sh**2 - d_sh**2)*L_acrylic_tot - 4*np.pi*hole_nozzle_d**2*0.25*((D_sh-d_sh)/2))*rho_sh
+m_acrylic = (np.pi * 0.25*(d_sh**2 - d_sh**2)*L_acrylic_tot - 4*np.pi*hole_nozzle_d**2*0.25*((d_sh-d_sh)/2))*rho_sh
 
 #total tube mass
 rho_tube=0.2 #check this
