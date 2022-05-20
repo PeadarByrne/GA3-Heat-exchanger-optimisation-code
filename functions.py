@@ -16,6 +16,8 @@ d_o = 8e-3     #OD copper tube
 d_n = 20e-3   #nozzle internal diameter
 d_sh = 64e-3    #shell internal diameter
 
+#testlester
+
 #Mass constraints
 mass_limit = 1.1 #limit to the total mass of the heat exchanger
 mlt = 0.2   #mass per unit length for copper tube
