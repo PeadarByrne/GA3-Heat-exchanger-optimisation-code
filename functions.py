@@ -58,9 +58,12 @@ def A(d):
     #function to calclate crosssectional area from diameter
     return np.pi*d**2/4
 
-def A_sh(Y,nb,Lt):
+def A_sh(Y,nb,Lt,Ns):
     b = Lt/(nb+1)   #baffle spacing
-    A_sh = d_sh*(Y - d_o)*(b/Y)   #flow area of fluid in shell inbetween baffles
+    if Ns ==1:
+        A_sh = d_sh*(Y - d_o)*(b/Y)   #flow area perpendicular to the tubes for the full diameter
+    elif Ns ==2:
+        A_sh = (d_sh/2)*(Y - d_o)*(b/Y)    #flow area perpendicular to the tubes for the radius
     return A_sh
 
 
