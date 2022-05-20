@@ -2,3 +2,14 @@ Create functions to have better input arrays
 Get checks working
 Improve numerical performance of hydraulic iteration loops
 Add iteration for multipass heat exchangers
+
+
+pressure drop due to expansions (Ke Kc) etc need to be doubled for multipass
+
+LESTER REMINDER TOMORROW, UPDATE OTHER [PAIR ON;]
+
+width of header tnk without valve (i.e. two shell pass) needs to be assigned as a variable soemwhere probably in fucntions but not sure, can change what weve done
+weve defined it as a variable inside a fucntion but we shoudlnt do this
+
+    POINT 2
+    we assumed 2 shell 2 pass uses CF, but should it not need iot if it is simply a really long counterflow HX?
