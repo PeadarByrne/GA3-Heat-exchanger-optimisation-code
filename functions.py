@@ -122,16 +122,6 @@ def Re_sh(m_c,A_sh):
     Re_sh=(v_sh*d_o/nu)
     return Re_sh
 
-def pitch(nt): 
-    #function that gives an approximate Y given to us by another group
-    coeffs = [5.06546580e-08, -5.11669291e-06,  1.92046625e-04, -3.39430513e-03, 3.50150832e-02]
-    polynomial_fit = 0
-    deg = len(coeffs) - 1
-    for i in range(deg + 1):
-        polynomial_fit += coeffs[i]*nt**(deg - i)
-    return polynomial_fit
-    #return Dsh/(1.3*np.sqrt(n_tubes))
-
 def return_max(array):
     # find the maximum value and its index in an array
     index = np.argmax(array)

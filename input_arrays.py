@@ -3,40 +3,53 @@ import functions as fu
 #Contains the potential HX designs/layouts
 
 #numbers of tubes
-nt_array = [4,5,9,12,13,16,3,7,13,19]
+nt_array = np.arange(1,22,1)
 
-#number of tubes in longest straight line or equivalent for funky layouts
-nt_cross_array = [2.828427125,3,4.242640687,4.16227766,5,5.656854249,2,3,4.464101615,5]
+#numbers of baffles
+nb_array = np.arange(1,20,1)
 
-#lengths of shell
-l_array = [0.35,0.35,0.35,0.35,0.35,0.35,0.35,0.35,0.35,0.35]
+passes_array = [[ 1,1],[1,2],[2,1],[2,2]]  #Nt = 1 for first two entries
 
-#lengths of tubes
-#lt_array = [0.243,0.243,0.243,0.243,0.243,0.21875,0.243,0.243,0.243,0.21875]
 
-def Lt_array_calc(nt_array,Nt_array):
-    Lt_array=[]
-    if Nt_array[i] == 1:
+
+def Lt_calc(nt,Nt):
+    Lt_calc = fu.Lt_total_cu/nt - 12e-3 #length of copper tube inside HX calculated by dividing total cu pipe by nt
+
+    #now calculate the maximum permissible tube length
+    if Nt == 1:
         a = b = 59e-3   # Header tank length + tube plate + end
-    elif Nt_array[i] == 2:
+    elif Nt == 2:
         a = 59e-3   #Header tank two fit both nozzle
         b = 34e-3   #Header tank for turning
-        Lt_calc = fu.Lt_total_cu/i - 12e-3 #length of copper tube inside HX calculated by dividing total cu pipe by nt
+
     Lt_max = fu.L_HX_max - (a + b)
+
+    Lt = min(Lt_max, Lt_calc)
+    return Lt
     
-    for i in range(nt_array):
 
-        if Lt_calc > Lt_max:
-            Lt_array.append(Lt_max)
-        else:
-            Lt_array.append(Lt_calc)
-    return Lt_array
+Lt_array =[[],[]]
+for i in nt_array:
+    Nt=1
+    Lt_array[0].append( round(Lt_calc(i,Nt),3) )
+    Nt=2
+    Lt_array[1].append( round(Lt_calc(i,Nt),3) )
 
-Lt_array = Lt_array_calc(nt_array,Nt=1)   
-#print(lt_array)
+
 
 #pitch spacings between centres
-Y_array = [1.67E-02,1.60E-02,1.22E-02,1.24E-02,1.07E-02,9.61E-03,2.13E-02,1.60E-02,1.17E-02,1.07E-02]
 
-#number of baffles
-nb_array = np.arange(0,5,1)
+def pitch(nt): 
+    #function that gives an approximate Y given to us by another group
+    coeffs = [5.06546580e-08, -5.11669291e-06,  1.92046625e-04, -3.39430513e-03, 3.50150832e-02]
+    polynomial_fit = 0
+    deg = len(coeffs) - 1
+    for i in range(deg + 1):
+        polynomial_fit += coeffs[i]*nt**(deg - i)
+    return polynomial_fit
+    #return Dsh/(1.3*np.sqrt(n_tubes))
+
+pitch_array =[]
+for i in nt_array:
+    pitch_array.append(round(pitch(i),5))
+
