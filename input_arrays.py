@@ -9,7 +9,7 @@ nt_array = np.arange(1,22,1)
 nb_array = np.arange(1,20,1)
 
 #[Nt,Ns]
-passes_array = [[ 1,1],[1,2],[2,1],[2,2]]  #Nt = 1 for first two entries
+passes_array = [[ 1,1],[2,1],[2,2]]  #Nt = 1 for first two entries
 
 
 

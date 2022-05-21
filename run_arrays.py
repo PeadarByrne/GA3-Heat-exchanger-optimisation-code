@@ -50,8 +50,20 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
             
 
     index_max, Q_LMTD = fu.return_max(Q_output_array)
-    nt,nb,Nt,Ns,e_LMTD = output_array[(index_max,0),(index_max,1)(index_max,2),(index_max,3),(index_max,4)]
+    #nt,nb,Nt,Ns,e_LMTD = output_array[(index_max,0),(index_max,1)(index_max,2),(index_max,3),(index_max,4)]
+    nt=output_array[index_max][0]
+    nb=output_array[index_max][1]
+    Nt=output_array[index_max][2]
+    Ns=output_array[index_max][3]
+    e_LMTD=output_array[index_max][4]
     print(nt,nb,Nt,Ns,e_LMTD,Q_LMTD)
+    return nt,nb,Nt,Ns,e_LMTD,Q_LMTD
 
            
-run_optimisation(input.nt_array,input.nb_array,input.passes_array,input.Lt_array,input.pitch_array)
+nt,nb,Nt,Ns,e_LMTD,Q_LMTD=run_optimisation(input.nt_array,input.nb_array,input.passes_array,input.Lt_array,input.pitch_array)
+print('nt = ',nt)
+print('nb = ',nb)
+print('Nt = ',Nt)
+print('Ns = ',Ns)
+print('e_LMTD = ',e_LMTD)
+print('Q_LMTD = ',Q_LMTD)
