@@ -65,6 +65,8 @@ def hydraulic_h(Lt,nt,Nt):
         if counter == 100:
             raise RuntimeError
     #print(counter)
+    print("p_h_calc", p_h_calc)
+    print("m_h", m_h)
 
     # calculated m_h is within the limits of the pumps capabilities
     # if m_h > 0.4583:    #Pump becomes unstead operating beyond this point
@@ -115,6 +117,8 @@ def hydraulic_c(Lt,Y,nb,N,Ns):
         if counter == 100:
             raise RuntimeError
     #print(counter)
+    print("p_c_calc", p_c_calc)
+    print("m_c", m_c)
 
     # check calculated m_c is within the limits of the pumps capabilities
     # if m_c > 0.5833:    #Pump becomes unstead operating beyond this point

@@ -14,7 +14,7 @@ holespace_min = 2e-3    #minimum gap between holes in tube plates
 l_endspace_min = 50e-3    #minimum length of end chambers
 d_i = 6e-3     #ID copper tube
 d_o = 8e-3     #OD copper tube
-d_n = 20e-3   #nozzle internal diameter
+d_n = 19e-3   #nozzle internal diameter
 d_sh = 64e-3    #shell internal diameter
 
 #testlester
@@ -52,8 +52,8 @@ nu = mu/rho   #kinematic vicosity
 Pr = 4.31     #prandtl number of fluid
 
 #Water input temperatures
-T_h_in=60   #hot water input temperature
-T_c_in=20   #cold water input temperature
+T_h_in=53.4   #hot water input temperature
+T_c_in=19.7  #cold water input temperature
 
 def A(d):
     #function to calclate crosssectional area from diameter
