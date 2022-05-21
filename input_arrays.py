@@ -8,6 +8,7 @@ nt_array = np.arange(1,22,1)
 #numbers of baffles
 nb_array = np.arange(1,20,1)
 
+#[Nt,Ns]
 passes_array = [[ 1,1],[1,2],[2,1],[2,2]]  #Nt = 1 for first two entries
 
 
@@ -53,3 +54,4 @@ pitch_array =[]
 for i in nt_array:
     pitch_array.append(round(pitch(i),5))
 
+#N_array 
