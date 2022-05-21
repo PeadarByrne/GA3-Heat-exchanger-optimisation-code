@@ -69,7 +69,7 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
         T_c_out = 0.5*T_c_out + 0.5*T_c_out_old
         #print(counter)
         
-    print("Correction factor:", F)
+    #print("Correction factor:", F)
 
     Q = U*A_i*F*delta_T_lm      #rate of heat transfer
     mc_c = m_c*fu.Cp  
