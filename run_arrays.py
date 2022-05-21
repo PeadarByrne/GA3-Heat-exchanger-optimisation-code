@@ -23,9 +23,9 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
 
             #find Lt
             if Nt==1:
-                Lt=Lt_array[j][0]
+                Lt=Lt_array[0][j]
             elif Nt==2:
-                Lt=Lt_array[j][1]
+                Lt=Lt_array[1][j]
             
             #find Y
             Y=pitch_array[j]
