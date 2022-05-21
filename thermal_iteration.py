@@ -1,6 +1,7 @@
 import numpy as np
 import functions as fu
 import hydraulics_iteration as hydro
+import math
 
 '''
 #made up values to test thermal, final code will need to pull these from hydaulics
@@ -27,6 +28,8 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     h_o = (Nu_o*fu.kw)/fu.d_o
     U = 1/((1/h_i) + ((fu.d_i*np.log10(fu.d_o/fu.d_i)/(2*fu.kt)))+(fu.d_i/(fu.d_o*h_o)))
 
+
+    
     dT_target = 0.01    #cut off value for change in temperature estimate between iterations
     dT_c = 1    #initialise change in cold temperature output between interations
     dT_h = 1    #initialise change in hot temperature output between interations
@@ -74,7 +77,7 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     print("Correction factor:", F)
     print("T_c_out", T_c_out)
     print("T_h_out", T_h_out)
-
+    
 
     Q = U*A_i*F*delta_T_lm      #rate of heat transfer
     mc_c = m_c*fu.Cp  
