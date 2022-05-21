@@ -85,7 +85,7 @@ def hydraulic_c(Lt,Y,nb,N,Ns):
     
     pitch_shape = "triangular"
 
-    c , a = fu.pitch(pitch_shape) 
+    c , a = fu.pitch_constants(pitch_shape) 
     A_sh = fu.A_sh(Y,nb,Lt,Ns) 
     counter =0
 

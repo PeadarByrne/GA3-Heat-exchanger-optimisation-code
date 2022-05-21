@@ -18,7 +18,7 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
 
     pitch_shape = "triangular"
 
-    c , a = fu.pitch(pitch_shape)
+    c , a = fu.pitch_constants(pitch_shape)
 
     A_i = np.pi * fu.d_i * Lt * nt #sum of inner surface areas of all tubes
     Nu_i = 0.023 * (Re_i**0.8) * (fu.Pr**0.3) #inner Nusselt number
@@ -114,7 +114,7 @@ def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt):
 
     pitch_shape = "triangular"
 
-    c , a = fu.pitch(pitch_shape)
+    c , a = fu.pitch_constants(pitch_shape)
 
     A_i = np.pi * fu.d_i * Lt * nt #sum of inner surface areas of all tubes
     Nu_i = 0.023 * (Re_i**0.8) * (fu.Pr**0.3) #inner Nusselt number

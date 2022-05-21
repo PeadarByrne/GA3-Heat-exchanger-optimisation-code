@@ -68,7 +68,7 @@ def A_sh(Y,nb,Lt,Ns):
     return A_sh
 
 
-def pitch(pitch_shape):
+def pitch_constants(pitch_shape):
     #input pitch shape as string description 'triangular' or 'square'
     if pitch_shape == 'triangular': #to give constants for triangular pitch shape
         c=0.2
