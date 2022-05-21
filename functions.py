@@ -2,8 +2,8 @@ from pydoc import doc
 import numpy as np
 
 #Geometric constraints
-l_max = 350e-3  #maximum permissible length of shell
-Lt_total = 3.5  #total length of copper tube available
+L_HX_max = 350e-3  #maximum permissible length of shell
+Lt_total_cu = 3.5  #total length of copper tube available
 Lt_extra = 12e-3 #additional length of copper pipe needed to fit pipes in securely, sum of both ends
 Lt_max = l_max - 100 -Lt_extra     #Based on maintaining the minium HX
 t_b = 1.5e-3    #baffle thickness
@@ -87,6 +87,7 @@ def m_t(m_h,nt):
 #     #convert kg/s to litres/second
 #     ml =m*(rho/1000)
 #     return ml
+
 def v_t(m_h,nt):
     #m_t = m_t(m_h)
     m_t = m_h/nt
@@ -119,6 +120,16 @@ def Re_sh(m_c,A_sh):
     v_sh=m_c/(rho*A_sh)
     Re_sh=(v_sh*d_o/nu)
     return Re_sh
+
+def pitch(nt): 
+    #function that gives an approximate Y given to us by another group
+    coeffs = [5.06546580e-08, -5.11669291e-06,  1.92046625e-04, -3.39430513e-03, 3.50150832e-02]
+    polynomial_fit = 0
+    deg = len(coeffs) - 1
+    for i in range(deg + 1):
+        polynomial_fit += coeffs[i]*nt**(deg - i)
+    return polynomial_fit
+    #return Dsh/(1.3*np.sqrt(n_tubes))
 
 def return_max(array):
     # find the maximum value and its index in an array

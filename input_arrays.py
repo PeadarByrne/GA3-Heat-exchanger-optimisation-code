@@ -2,9 +2,6 @@ import numpy as np
 import functions as fu
 #Contains the potential HX designs/layouts
 
-#string descriptions of pitch shape
-shape_array = ["square","square","square","square","square","square","triangular","triangular","triangular","triangular"]
-
 #numbers of tubes
 nt_array = [4,5,9,12,13,16,3,7,13,19]
 
@@ -17,17 +14,25 @@ l_array = [0.35,0.35,0.35,0.35,0.35,0.35,0.35,0.35,0.35,0.35]
 #lengths of tubes
 #lt_array = [0.243,0.243,0.243,0.243,0.243,0.21875,0.243,0.243,0.243,0.21875]
 
-def lt_array_calc(nt_array):
-    l_array=[]
-    for i in nt_array:
-        l=fu.Lt_total/i
-        if l>0.243:
-            l_array.append(0.243)
-        else:
-            l_array.append(l)
-    return l_array
+def Lt_array_calc(nt_array,Nt_array):
+    Lt_array=[]
+    if Nt_array[i] == 1:
+        a = b = 59e-3   # Header tank length + tube plate + end
+    elif Nt_array[i] == 2:
+        a = 59e-3   #Header tank two fit both nozzle
+        b = 34e-3   #Header tank for turning
+        Lt_calc = fu.Lt_total_cu/i - 12e-3 #length of copper tube inside HX calculated by dividing total cu pipe by nt
+    Lt_max = fu.L_HX_max - (a + b)
+    
+    for i in range(nt_array):
 
-lt_array = lt_array_calc(nt_array)   
+        if Lt_calc > Lt_max:
+            Lt_array.append(Lt_max)
+        else:
+            Lt_array.append(Lt_calc)
+    return Lt_array
+
+Lt_array = Lt_array_calc(nt_array,Nt=1)   
 #print(lt_array)
 
 #pitch spacings between centres
