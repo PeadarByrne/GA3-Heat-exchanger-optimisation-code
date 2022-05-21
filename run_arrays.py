@@ -41,7 +41,7 @@ def run_optimisation(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_arra
 
                 check.CheckDesign(l,lt,nt,nt_cross,Y,nb)
 
-                e_LMTD , Q_LMTD, e_NTU, Q_NTU = HXcalc.HX_analysis(nt,nb,N,Y,lt,shape)
+                e_LMTD , Q_LMTD, e_NTU, Q_NTU = HXcalc.HX_analysis(nt,nb,Nt,Ns)
                 #append results into output arrays
                 e_LMTD_array.append(e_LMTD)
                 Q_LMTD_array.append(Q_LMTD)
