@@ -14,8 +14,8 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
     #passes loop
     for i in range(len(passes_array)):
         #Iterates different passes
-        Nt=passes_array[i,0]
-        Ns=passes_array[i,1]
+        Nt=passes_array[i][0]
+        Ns=passes_array[i][1]
 
         #nt loop
         for j in range(len(nt_array)):
@@ -23,9 +23,9 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
 
             #find Lt
             if Nt==1:
-                Lt=Lt_array[j,0]
+                Lt=Lt_array[j][0]
             elif Nt==2:
-                Lt=Lt_array[j,1]
+                Lt=Lt_array[j][1]
             
             #find Y
             Y=pitch_array[j]
