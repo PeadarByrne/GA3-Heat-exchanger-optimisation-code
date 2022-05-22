@@ -22,6 +22,7 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     c , a = fu.pitch_constants(pitch_shape)
 
     A_i = np.pi * fu.d_i * Lt * nt #sum of inner surface areas of all tubes
+    A_o = np.pi * fu.d_o * Lt * nt #sum of inner surface areas of all tubes
     Nu_i = 0.023 * (Re_i**0.8) * (fu.Pr**0.3) #inner Nusselt number
     Nu_o = c * (Re_o**0.6) * (fu.Pr**0.3) #outer Nusselt number  #c is 0.2 for triangular tube pitch and0.15 for square tube pitch
     h_i = (Nu_i*fu.kw)/fu.d_i
@@ -77,9 +78,9 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     print("Correction factor:", F)
     print("T_c_out", T_c_out)
     print("T_h_out", T_h_out)
-    
 
-    Q = U*A_i*F*delta_T_lm      #rate of heat transfer
+
+    Q = U*A_o*F*delta_T_lm      #rate of heat transfer
     mc_c = m_c*fu.Cp  
     mc_h = m_h*fu.Cp
     mc_min = min(mc_h,mc_c)     #find the minimum value of mcp
@@ -125,6 +126,7 @@ def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt, Ns):
     c , a = fu.pitch_constants(pitch_shape)
 
     A_i = np.pi * fu.d_i * Lt * nt #sum of inner surface areas of all tubes
+    A_o = np.pi * fu.d_o * Lt * nt #sum of inner surface areas of all tubes
     Nu_i = 0.023 * (Re_i**0.8) * (fu.Pr**0.3) #inner Nusselt number
     Nu_o = c * (Re_o**0.6) * (fu.Pr**0.3) #outer Nusselt number  #c is 0.2 for triangular tube pitch and0.15 for square tube pitch
     h_i = (Nu_i*fu.kw)/fu.d_i
@@ -137,7 +139,7 @@ def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt, Ns):
     mc_max = max(mc_h,mc_c)
 
     Rc = mc_min/mc_max    #Ratio of the heat capacities
-    NTU = U*A_i/mc_min    #Number of Transfer Units
+    NTU = U*A_o/mc_min    #Number of Transfer Units
 
     e_NTU = (1 - np.exp(-NTU*(1 - Rc)))/(1 - Rc*np.exp(-NTU*(1 - Rc)))
 

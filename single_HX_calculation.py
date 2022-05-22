@@ -30,8 +30,8 @@ e_LMTD , Q_LMTD, e_NTU, Q_NTU =single_HX_analysis(13,14,1,1,0.35,0.012,3)
 print("JL_2018:",e_LMTD , Q_LMTD, e_NTU, Q_NTU)
 
 
-#e_LMTD , Q_LMTD, e_NTU, Q_NTU =single_HX_analysis(14,12,2,2,0.21612,0.015,3)
-#print("B_2017:",e_LMTD , Q_LMTD, e_NTU, Q_NTU)
+e_LMTD , Q_LMTD, e_NTU, Q_NTU =single_HX_analysis(14,12,2,2,0.21612,0.015,3)
+print("B_2017:",e_LMTD , Q_LMTD, e_NTU, Q_NTU)
 
 
 
