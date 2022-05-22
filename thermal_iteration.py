@@ -27,12 +27,12 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     c , a = fu.pitch_constants(pitch_shape)
 
     A_i = np.pi * fu.d_i * Lt * nt #sum of inner surface areas of all tubes
-    A_o = np.pi * fu.d_o * Lt * nt #sum of inner surface areas of all tubes
+    A_o = np.pi * fu.d_o * Lt * nt #sum of outer surface areas of all tubes
     Nu_i = 0.023 * (Re_i**0.8) * (fu.Pr**0.3) #inner Nusselt number
     Nu_o = c * (Re_o**0.6) * (fu.Pr**0.3) #outer Nusselt number  #c is 0.2 for triangular tube pitch and0.15 for square tube pitch
     h_i = (Nu_i*fu.kw)/fu.d_i
     h_o = (Nu_o*fu.kw)/fu.d_o
-    U = 1/((1/h_i) + ((fu.d_i*np.log10(fu.d_o/fu.d_i)/(2*fu.kt)))+(fu.d_i/(fu.d_o*h_o)))
+    U = 1/((1/h_i) + ((fu.d_i*np.log(fu.d_o/fu.d_i)/(2*fu.kt)))+(fu.d_i/(fu.d_o*h_o)))
 
 
     

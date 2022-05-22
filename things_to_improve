@@ -20,3 +20,11 @@ nt needed to be halved and Lt doubled for 2 tube pass (hydraulic hot side)
 nt needed to be halved and Lt doubled for 2 tube pass (thermal)
 Changed the input nt array to be just even numbers
 Changed the pump limits to allow pressure to go to zero
+
+Zoom call notes to improve + changes
+Needed change kc and ke to infinity 
+Multiplied p_t by Nt
+Multiplied p_n by 2 to account for two nozzles
+Peadar check header turning loss
+Add option to change Header lengths
+Changed log10 to ln
