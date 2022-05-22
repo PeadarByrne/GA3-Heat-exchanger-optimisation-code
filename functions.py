@@ -52,8 +52,8 @@ nu = mu/rho   #kinematic vicosity
 Pr = 4.31     #prandtl number of fluid
 
 #Water input temperatures
-T_h_in=53.4   #hot water input temperature
-T_c_in=19.7  #cold water input temperature
+T_h_in=60   #hot water input temperature
+T_c_in=20  #cold water input temperature
 
 def A(d):
     #function to calclate crosssectional area from diameter
