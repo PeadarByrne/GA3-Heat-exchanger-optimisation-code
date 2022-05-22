@@ -100,9 +100,14 @@ def hydraulic_c(Lt,Y,nb,N,Ns):
         v_sh = fu.v_sh(m_c,A_sh) 
         Re_sh = fu.Re_sh(m_c,A_sh)
         vn_c = fu.v_n(m_c)
-        p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb + 1) #Shell side pressure loss (This has poor validity)
-        p_n = 0.5*fu.rho*vn_c**2
-        p_turn = 0.5*fu.rho*(v_sh**2)*Ns*nb                 #turning pressure loss
+        if Ns == 1:
+            p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb + 1) #Shell side pressure loss normal to tubes
+            p_turn = 0.5*fu.rho*(v_sh**2)*Ns*nb                  #turning pressure loss
+        elif Ns == 2:
+            #the losses are doubled as nb represents number of plates and one plate is a baffle on two sides
+            p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb + 1)*2  #Shell side pressure loss normal to tubes
+            p_turn = 0.5*fu.rho*(v_sh**2)*Ns*nb *2                #turning pressure loss
+        p_n = 0.5*fu.rho*vn_c**2                            #nozzle losses
         p_c = p_sh + p_n + p_turn   #calculated pressure from m_c guess
         p_c_calc = p_c/1e5  #convert pressure to bar
         
