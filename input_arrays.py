@@ -3,7 +3,7 @@ import functions as fu
 #Contains the potential HX designs/layouts
 
 #numbers of tubes
-nt_array = np.arange(1,22,1)
+nt_array = np.arange(2,22,2)
 
 #numbers of baffles
 nb_array = np.arange(1,20,1)

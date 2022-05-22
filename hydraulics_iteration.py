@@ -16,6 +16,12 @@ def hydraulic_h(Lt,nt,Nt):
     p_calc_old = 0
     e_h_target=0.0001
     e=1
+
+    #two passes creates an equivalent HX with nt/2 of length 2Lt
+    if Nt == 2:
+        nt = nt/2
+        Lt = 2*Lt
+
     sigma=fu.sigma(nt)
 
     counter =0
@@ -37,6 +43,7 @@ def hydraulic_h(Lt,nt,Nt):
         p_t = f*(Lt/fu.d_i)*0.5*fu.rho*v_t**2     #pressure loss along copper tubes from friction
         kc = -0.3952*sigma + 0.4973                  #regression functions from excel for Re=10000 for turbulent flow
         ke = 0.9773*sigma**2 -2.0738*sigma + 0.9983  
+        #print("kc,ke",kc,ke)
         p_e = 0.5*fu.rho*v_t**2*(kc + ke)*Nt            #pressure loss caused by entrance exit losses into copper tubes - updated with Nt
         p_n = 0.5*fu.rho*v_nh**2    # pressure loss from nozzles entering HX
 
@@ -92,7 +99,7 @@ def hydraulic_c(Lt,Y,nb,N,Ns):
     c , a = fu.pitch_constants(pitch_shape) 
     A_sh = fu.A_sh(Y,nb,Lt,Ns) 
     counter =0
-
+    Kt = 1    #Coefficient for turning loss
     while(abs(e)>e_c_target and counter<=100):
 
         counter+=1
@@ -102,11 +109,11 @@ def hydraulic_c(Lt,Y,nb,N,Ns):
         vn_c = fu.v_n(m_c)
         if Ns == 1:
             p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb + 1) #Shell side pressure loss normal to tubes
-            p_turn = 0.5*fu.rho*(v_sh**2)*Ns*nb                  #turning pressure loss
+            p_turn = Kt*0.5*fu.rho*(v_sh**2)*Ns*nb                  #turning pressure loss
         elif Ns == 2:
             #the losses are doubled as nb represents number of plates and one plate is a baffle on two sides
             p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb + 1)*2  #Shell side pressure loss normal to tubes
-            p_turn = 0.5*fu.rho*(v_sh**2)*Ns*nb *2                #turning pressure loss
+            p_turn = Kt*0.5*fu.rho*(v_sh**2)*Ns*nb *2                #turning pressure loss
         p_n = 0.5*fu.rho*vn_c**2                            #nozzle losses
         p_c = p_sh + p_n + p_turn   #calculated pressure from m_c guess
         p_c_calc = p_c/1e5  #convert pressure to bar

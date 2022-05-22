@@ -12,6 +12,11 @@ m_h = 0.48     #example value of hot water mass flow rate
    
 
 def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
+    #two passes creates an equivalent HX with nt/2 of length 2Lt
+    if Nt == 2:
+        nt = nt/2
+        Lt = 2*Lt
+        
     #Find Reynolds numbers
     Re_i = fu.Re_t(m_h,nt)
     A_sh = fu.A_sh(Y,nb,Lt,Ns) 
@@ -63,8 +68,8 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
                 F = np.sqrt(2)*((1-W_dash)/W_dash)/np.log(((W_dash/(1-W_dash))+(1/np.sqrt(2)))/((W_dash/(1-W_dash))-(1/np.sqrt(2))))
         
         delta_T_lm = ((fu.T_h_in-T_c_out)-(T_h_out-fu.T_c_in))/(np.log((fu.T_h_in-T_c_out)/(T_h_out-fu.T_c_in)))
-        T_c_out = ((F * U * A_i * delta_T_lm)+(fu.T_c_in * m_c * fu.Cp))/(m_c*fu.Cp)     #finds new cold output temp
-        T_h_out = (-(F * U * A_i * delta_T_lm)+(fu.T_h_in * m_h * fu.Cp))/(m_h*fu.Cp)    #finds new hot output temp
+        T_c_out = ((F * U * A_o * delta_T_lm)+(fu.T_c_in * m_c * fu.Cp))/(m_c*fu.Cp)     #finds new cold output temp
+        T_h_out = (-(F * U * A_o * delta_T_lm)+(fu.T_h_in * m_h * fu.Cp))/(m_h*fu.Cp)    #finds new hot output temp
         
         #iterating
         dT_c = abs(T_c_out-T_c_out_old)     #finds change in estimated cold output temp
