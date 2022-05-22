@@ -76,10 +76,7 @@ def hydraulic_h(Lt,nt,Nt):
     print("m_h", m_h)
 
     # calculated m_h is within the limits of the pumps capabilities
-    if m_h > 0.4583:    #Pump becomes unstead operating beyond this point
-        print('hotside-outside the pumps performance limits')
-        #raise ValueError('outside the pumps performance limits')
-    elif m_h < 0:
+    if m_hl < 0.0694:
         print('hotside-outside the pumps performance limits')
         #raise ValueError('outside the pumps performance limits')
     return m_h    
@@ -135,10 +132,7 @@ def hydraulic_c(Lt,Y,nb,N,Ns):
     print("m_c", m_c)
 
     #check calculated m_c is within the limits of the pumps capabilities
-    if m_c > 0.5833:    #Pump becomes unstead operating beyond this point
-        print('coldside-outside the pumps performance limits')
-        #raise ValueError('outside the pumps performance limits')
-    elif m_c < 0:
+    if m_cl < 0.1708:
         print('coldside-outside the pumps performance limits')
         #raise ValueError('outside the pumps performance limits')
     return m_c

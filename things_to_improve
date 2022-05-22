@@ -13,3 +13,10 @@ weve defined it as a variable inside a fucntion but we shoudlnt do this
 
     POINT 2
     we assumed 2 shell 2 pass uses CF, but should it not need iot if it is simply a really long counterflow HX?
+
+CORRECTIONS-Peadar
+p_sh and p_nh needed to be doubled for 2 shell pass (hyrdraulic cold side)
+nt needed to be halved and Lt doubled for 2 tube pass (hydraulic hot side)
+nt needed to be halved and Lt doubled for 2 tube pass (thermal)
+Changed the input nt array to be just even numbers
+Changed the pump limits to allow pressure to go to zero
