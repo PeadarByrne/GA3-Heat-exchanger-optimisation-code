@@ -5,7 +5,7 @@ import numpy as np
 #Geometric constraints
 L_HX_max = 350e-3  #maximum permissible length of shell
 Lt_total_cu = 3.5  #total length of copper tube available
-#Lt_extra = 12e-3 #additional length of copper pipe needed to fit pipes in securely, sum of both ends
+Lt_extra = 12e-3 #additional length of copper pipe needed to fit pipes in securely, sum of both ends
 #Lt_max = L_HX_max - 100 -Lt_extra     #Based on maintaining the minium HX
 t_b = 1.5e-3    #baffle thickness
 t_p = 4.5e-3    #tube plate and end plate thickness

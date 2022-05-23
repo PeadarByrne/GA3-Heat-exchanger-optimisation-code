@@ -1,8 +1,8 @@
 from operator import length_hint
 from matplotlib.pyplot import vlines
 import functions as fu
-from input_arrays import Y_array
 
+#NOT NEEDED
 #check total length of HX
 def CheckHXlength(l):
     if l > fu.l_max:
@@ -10,6 +10,7 @@ def CheckHXlength(l):
         raise ValueError("The heat exchanger is too long")
 
 
+#NOT NEEDED
 #check that we have enough copper tube
 def CheckTubeLength(Lt,nt):
     Lt_used = (Lt + fu.Lt_extra) * nt
@@ -28,21 +29,22 @@ def CheckTubesInShell(nt_cross,Y):
 
 #check that HX in not overweight
 def CheckMass(Lt,l,nt,nb):
-    mass_tubes = (Lt+fu.Lt_extra)*fu.mlt #total mass of copper tubes used
-    mass_shell = l*fu.mls    #total mass of shell
+    mass_tubes = (Lt+fu.Lt_extra)*fu.mlt*nt #total mass of copper tubes used
+    mass_shell = l*fu.mls    #total mass of shell, including around end chambers
     mass_nozz = 4*fu.m_n    #total mass of nozzles
     A_end = fu.A(fu.d_sh)     #area of an end plate
     A_plate = A_end - (nt*fu.A(fu.d_o))  #area of a tube end plate
     mass_plates = ((2*A_end) + (2*A_plate))*fu.map  #total mass of end plates and tube end plates
     #baffle area approximated to half the shell area
-    A_baffle = 0.5*A_end    #area of a bafflew
-    mass_baffles = nb*A_baffle   #total mass of baffles
+    A_baffle = 0.5*A_end    #area of a baffle
+    mass_baffles = nb*A_baffle*fu.mab   #total mass of baffles
     #total mass of the heat exchanger
     mass_total = mass_tubes+mass_shell+mass_nozz+mass_plates+mass_baffles
     if mass_total > fu.mass_limit:
         print("Design is overweight")
         raise ValueError("This design is overweight")
 
+#NOT NEEDED
 #check end chamber room/space for end nozzles
 def CheckEnds(l,Lt):
     l_endspace = (l-Lt)/2 #length of end chambers
@@ -58,6 +60,7 @@ def CheckHoles(Y):
         print("Holes in the tube end plates are too close together")
         raise ValueError("Holes in the tube end plates are too close together")
 
+#REDUNDANT
 #Function to check all input arrays are equal length
 def CheckArrayLength(shape_array,nt_array,nt_cross_array,l_array,lt_array,Y_array):
     length = len(shape_array)
