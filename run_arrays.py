@@ -3,6 +3,7 @@ import functions as fu
 #import validity_check as check
 import single_HX_calculation as HXcalc
 import input_arrays as input
+import validity_check as check
 
 def choose_N(nt):
     if nt>15:
@@ -42,13 +43,17 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
             #nb loop
             for k in range(len(nb_array)):
                 nb=nb_array[k]
-
-                #run single analysis
-                e_LMTD , Q_LMTD, e_NTU, Q_NTU = HXcalc.HX_analysis(nt,nb,Nt,Ns,Lt,Y,N)
-                #append results into one output array
-                output=[nt,nb,Nt,Ns,Lt,Y,e_LMTD]
-                output_array.append(output)
-                Q_output_array.append(Q_LMTD)
+                #Check if design is overweight
+                try:
+                    check.CheckMass(Lt,nt,nb,Nt,Ns)
+                    #run single analysis
+                    e_LMTD , Q_LMTD, e_NTU, Q_NTU = HXcalc.HX_analysis(nt,nb,Nt,Ns,Lt,Y,N)
+                    #append results into one output array
+                    output=[nt,nb,Nt,Ns,Lt,Y,e_LMTD]
+                    output_array.append(output)
+                    Q_output_array.append(Q_LMTD)
+                except ValueError:
+                    print('Illegal design skipped')
                 k+=1
             
     #Find index of best heat transfer case
