@@ -28,9 +28,9 @@ def CheckTubesInShell(nt_cross,Y):
 
 
 #check that HX in not overweight
-def CheckMass(Lt,l,nt,nb):
+def CheckMass(Lt,nt,nb,Nt,Ns):
+    
     mass_tubes = (Lt+fu.Lt_extra)*fu.mlt*nt #total mass of copper tubes used
-    mass_shell = l*fu.mls    #total mass of shell, including around end chambers
     mass_nozz = 4*fu.m_n    #total mass of nozzles
     A_end = fu.A(fu.d_sh)     #area of an end plate
     A_plate = A_end - (nt*fu.A(fu.d_o))  #area of a tube end plate
@@ -38,11 +38,29 @@ def CheckMass(Lt,l,nt,nb):
     #baffle area approximated to half the shell area
     A_baffle = 0.5*A_end    #area of a baffle
     mass_baffles = nb*A_baffle*fu.mab   #total mass of baffles
+    
+    if Nt == Ns == 1:
+        #both full size end chambers with nozzles
+        l=Lt+0.1
+        mass_splitter=0
+    elif Nt==2 and Ns==1:
+        #One smaller end chamber
+        l=Lt+0.08
+        #mass of splitter in end chamber
+        mass_splitter = 0.05*fu.d_sh*fu.mab
+    elif Nt==2 and Ns==2:
+        #One smaller end chamber
+        l=Lt+0.08
+        #mass of splitter in end chamber and 
+        mass_splitter = (0.05 + Lt)*fu.d_sh*fu.mab
+
+    mass_shell = l*fu.mls    #total mass of shell, including around end chambers
     #total mass of the heat exchanger
-    mass_total = mass_tubes+mass_shell+mass_nozz+mass_plates+mass_baffles
+    mass_total = mass_tubes+mass_shell+mass_nozz+mass_plates+mass_baffles+mass_splitter
     if mass_total > fu.mass_limit:
         print("Design is overweight")
         raise ValueError("This design is overweight")
+
 
 #NOT NEEDED
 #check end chamber room/space for end nozzles
