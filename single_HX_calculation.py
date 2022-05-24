@@ -11,7 +11,7 @@ def HX_analysis(nt,nb,Nt,Ns,Lt,Y,N):
     e_LMTD,Q_LMTD = thermal.Thermal_LMTD(m_h,m_c,nt,nb,Y,Lt, Nt, Ns)    #Run LMDT analysis
     e_NTU,Q_NTU = thermal.Thermal_NTU(m_h,m_c,nt,nb,Y,Lt,Ns)   #Run NTU analysis
 
-    return e_LMTD , Q_LMTD, e_NTU, Q_NTU
+    return e_LMTD , Q_LMTD, e_NTU, Q_NTU, m_c, m_h
 
 def single_HX_analysis(nt,nb,Nt,Ns,Lt,Y,N):
     m_c=hydro.hydraulic_c(Lt,Y,nb,N,Ns)  #run cold hydrualics function

@@ -60,9 +60,9 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
                 try:
                     check.CheckMass(Lt,nt,nb,Nt,Ns)
                     #run single analysis
-                    e_LMTD , Q_LMTD, e_NTU, Q_NTU = HXcalc.HX_analysis(nt,nb,Nt,Ns,Lt,Y,N)
+                    e_LMTD , Q_LMTD, e_NTU, Q_NTU, m_c, m_h = HXcalc.HX_analysis(nt,nb,Nt,Ns,Lt,Y,N)
                     #append results into one output array
-                    output=[nt,nb,Nt,Ns,Lt,Y,Q_LMTD, e_LMTD]    #added Q to this array so all design data in this array
+                    output=[nt,nb,Nt,Ns,Lt,Y,Q_LMTD, e_LMTD,m_c,m_h]    #added Q to this array so all design data in this array
                     output_array.append(output)
                     Q_output_array.append(Q_LMTD)
                 except ValueError:
@@ -104,6 +104,8 @@ Lt=top_design[4]
 Y=top_design[5]
 Q_LMTD = top_design[6]
 e_LMTD = top_design[7]
+m_c = top_design[8]
+m_h = top_design[9]
 
 # nt,nb,Nt,Ns,Lt,Y,e_LMTD,Q_LMTD=run_optimisation(input.nt_array,input.nb_array,input.passes_array,input.Lt_array,input.pitch_array)
 print('nt = ',nt)
@@ -114,4 +116,5 @@ print('Lt = ',Lt)
 print('Y = ',Y)
 print('e_LMTD = ',e_LMTD)
 print('Q_LMTD = ',Q_LMTD)
-
+print('m_c = ',m_c)
+print('m_h = ',m_h)
