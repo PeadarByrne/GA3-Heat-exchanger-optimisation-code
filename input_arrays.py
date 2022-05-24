@@ -12,10 +12,9 @@ nb_array = np.arange(1,20,1)
 passes_array = [[ 1,1],[2,1],[2,2]]
 
 
-
 def Lt_calc(nt,Nt):
     Lt_calc = fu.Lt_total_cu/nt - 12e-3 #length of copper tube inside HX calculated by dividing total cu pipe by nt
-
+    #12e-3 includes extra copper tube length fr width of end plate and extra poking out the end
     #now calculate the maximum permissible tube length
     if Nt == 1:
         a = b = 59e-3   # Header tank length + tube plate + end
@@ -37,7 +36,6 @@ for i in nt_array:
     Lt_array[1].append( round(Lt_calc(i,Nt),3) )
 
 
-
 #pitch spacings between centres
 
 def pitch(nt): 
@@ -54,4 +52,4 @@ pitch_array =[]
 for i in nt_array:
     pitch_array.append(round(pitch(i),5))
 
-#N_array 
+print(pitch_array)
