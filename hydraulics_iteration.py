@@ -65,7 +65,7 @@ def hydraulic_h(Lt,nt,Nt):
         dp_calc = (p_h_calc - p_calc_old)/(m_h - m_h_old) #Calculate an approximate derivative of p_calc 
         m_h_old = m_h   #store m_h from previous guess
         m_hl =(fu.rho/1000)*m_h #convert to litres/s
-        p_h_pump = -0.4713*m_hl**2 - 0.8896*m_hl + 0.6598
+        p_h_pump = -0.4713*m_hl**2 - 0.8896*m_hl + 0.6381
         dp_h_pump = -2*.4713*m_hl - 0.8896
         m_h = m_h - (p_h_pump - p_h_calc)/(dp_h_pump - dp_calc)    #calculate new mass flow using newton raphson iteration
         e = p_h_pump - p_h_calc #calculate error
