@@ -35,6 +35,8 @@ e_LMTD , Q_LMTD, e_NTU, Q_NTU =single_HX_analysis(14,12,2,2,0.21612,0.015,3)
 print("B_2017:",e_LMTD , Q_LMTD, e_NTU, Q_NTU)
 print("B_2017:31.4%, 13.01kW")
 
+e_LMTD , Q_LMTD, e_NTU, Q_NTU =single_HX_analysis(14,12,1,1,0.232,0.014,4)
+print("Our Design:",e_LMTD , Q_LMTD, e_NTU, Q_NTU)
 
 
 
