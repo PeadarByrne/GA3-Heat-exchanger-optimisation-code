@@ -30,6 +30,7 @@ def CheckMass(Lt,nt,nb,Nt,Ns):
         #mass of splitter in end chamber and 
         mass_splitter = (0.05 + Lt)*fu.d_sh*fu.mab
 
+    l+=9e-3
     mass_shell = l*fu.mls    #total mass of shell, including around end chambers
     #total mass of the heat exchanger
     mass_total = mass_tubes+mass_shell+mass_nozz+mass_plates+mass_baffles+mass_splitter
