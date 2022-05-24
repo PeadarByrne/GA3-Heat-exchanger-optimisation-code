@@ -19,8 +19,8 @@ def Lt_calc(nt,Nt):
     if Nt == 1:
         a = b = 59e-3   # Header tank length + tube plate + end
     elif Nt == 2:
-        a = 59e-3   #Header tank two fit both nozzle
-        b = 34e-3   #Header tank for turning
+        a = 57e-3   #Header tank two fit both nozzle
+        b = 29e-3   #Header tank for turning
 
     Lt_max = fu.L_HX_max - (a + b)
 

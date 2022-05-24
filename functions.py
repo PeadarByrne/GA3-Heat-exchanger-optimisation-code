@@ -20,7 +20,7 @@ d_sh = 64e-3    #shell internal diameter
 #testlester
 
 #Mass constraints
-mass_limit = 1.16 #limit to the total mass of the heat exchanger
+mass_limit = 1.155 #limit to the total mass of the heat exchanger
 mlt = 0.2   #mass per unit length for copper tube
 mls = 0.65  #mass per unit lenght for acrylic shell
 m_n = 0.025 #mass per nozzle
