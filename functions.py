@@ -16,6 +16,7 @@ d_i = 6e-3     #ID copper tube
 d_o = 8e-3     #OD copper tube
 d_n = 19e-3   #nozzle internal diameter
 d_sh = 64e-3    #shell internal diameter
+shell_nozzle_space = 38.625e-3  #extra room needed t end of shell for nozzle
 
 #testlester
 
@@ -60,13 +61,18 @@ def A(d):
     return np.pi*d**2/4
 
 def A_sh(Y,nb,Lt,Ns):
-    b = Lt/(nb+1)   #baffle spacing
+    #b = Lt/(nb+1)   #baffle spacing
     if Ns ==1:
+        b = (Lt-(2*shell_nozzle_space))/(nb+1)  #baffle spacing
         A_sh = d_sh*(Y - d_o)*(b/Y)   #flow area perpendicular to the tubes for the full diameter
     elif Ns ==2:
+        b = (Lt-shell_nozzle_space)/(nb+1)  #baffle spacing
         A_sh = (d_sh/2)*(Y - d_o)*(b/Y)    #flow area perpendicular to the tubes for the radius
     return A_sh
 
+def A_sh_ends(Y):
+    A_sh_ends = d_sh*(Y - d_o)*(shell_nozzle_space/Y)
+    return A_sh_ends
 
 def pitch_constants(pitch_shape):
     #input pitch shape as string description 'triangular' or 'square'
