@@ -6,11 +6,14 @@ import input_arrays as input
 import validity_check as check
 
 
-def choose_N(nt):
-    if nt>15:
-        N=4
-    else:
-        N=3
+def choose_N(nt,Nt):
+    if Nt == 2:
+        N = 3
+    elif Nt == 1:
+        if nt < 14:
+            N=3
+        else:
+            N=4
     return N
 
 def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
@@ -38,7 +41,7 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
             #find Y
             Y=pitch_array[j]
 
-            N = choose_N(nt)
+            N = choose_N(nt,Nt)
             
             
             #nb loop
@@ -67,7 +70,7 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
                 k+=1
             
     #Find index of best heat transfer case
-    N_designs = 10  #number of top designs to print
+    N_designs = 20  #number of top designs to print
     top_designs = []    #array of top designs
     for i in range(N_designs):
         index_max, Q_LMTD = fu.return_max(Q_output_array)
