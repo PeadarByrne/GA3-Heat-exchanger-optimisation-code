@@ -63,10 +63,10 @@ def A(d):
 def A_sh(Y,nb,Lt,Ns):
     #b = Lt/(nb+1)   #baffle spacing
     if Ns ==1:
-        b = (Lt-(2*shell_nozzle_space))/(nb+1)  #baffle spacing
+        b = (Lt-(2*shell_nozzle_space))/(nb-1)  #baffle spacing
         A_sh = d_sh*(Y - d_o)*(b/Y)   #flow area perpendicular to the tubes for the full diameter
     elif Ns ==2:
-        b = (Lt-shell_nozzle_space)/(nb+1)  #baffle spacing
+        b = (Lt-shell_nozzle_space)/(nb)  #baffle spacing
         A_sh = (d_sh/2)*(Y - d_o)*(b/Y)    #flow area perpendicular to the tubes for the radius
     return A_sh
 
