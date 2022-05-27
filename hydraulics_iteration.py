@@ -9,7 +9,7 @@ import math
 
 
 
-def hydraulic_h(Lt,nt,Nt,HGn,HG):
+def hydraulic_h(Lt,nt,Nt,HGn,HG,year):
     #Guess mh
     m_h=0.5
     m_h_old = 0
@@ -70,8 +70,10 @@ def hydraulic_h(Lt,nt,Nt,HGn,HG):
         dp_calc = (p_h_calc - p_calc_old)/(m_h - m_h_old) #Calculate an approximate derivative of p_calc 
         m_h_old = m_h   #store m_h from previous guess
         m_hl =(fu.rho/1000)*m_h #convert to litres/s
-        p_h_pump = -0.4713*m_hl**2 - 0.8896*m_hl + 0.6381
-        dp_h_pump = -2*.4713*m_hl - 0.8896
+        p_h_pump = fu.chart_hot_pdrop(year, m_hl, 3)[0]
+        dp_h_pump = fu.chart_hot_pdrop(year, m_hl, 3)[1]
+        #p_h_pump = -0.4713*m_hl**2 - 0.8896*m_hl + 0.6381
+        #dp_h_pump = -2*.4713*m_hl - 0.8896
         m_h = m_h - (p_h_pump - p_h_calc)/(dp_h_pump - dp_calc)    #calculate new mass flow using newton raphson iteration
         e = p_h_pump - p_h_calc #calculate error
         p_calc_old = p_h_calc   #store previosly calculated pressure for next iteration
@@ -91,7 +93,7 @@ def hydraulic_h(Lt,nt,Nt,HGn,HG):
 #------Coldside analysis
 
 
-def hydraulic_c(Lt,Y,nb,N,Ns):
+def hydraulic_c(Lt,Y,nb,N,Ns,year):
     m_c=0.4
     m_c_old =0
     p_calc_old =0
@@ -127,8 +129,10 @@ def hydraulic_c(Lt,Y,nb,N,Ns):
         dp_calc = (p_c_calc - p_calc_old)/(m_c - m_c_old) #Calculate an approximate derivative of p_calc 
         m_c_old = m_c   #store m_c from previous guess
         m_cl =(fu.rho/1000)*m_c #convert to litres/s
-        p_c_pump = -0.7843*m_cl**2 - 0.4802*m_cl + 0.6598
-        dp_c_pump = -2*.7843*m_cl - 0.4802
+        p_c_pump = fu.chart_cold_pdrop(year, m_cl, 3)[0]
+        dp_c_pump = fu.chart_cold_pdrop(year, m_cl, 3)[1]
+        #p_c_pump = -0.7843*m_cl**2 - 0.4802*m_cl + 0.6598
+        #dp_c_pump = -2*.7843*m_cl - 0.4802
         m_c = m_c - (p_c_pump - p_c_calc)/(dp_c_pump - dp_calc)    #calculate new mass flow using newton raphson iteration
         e = p_c_pump - p_c_calc #calculate error
         p_calc_old = p_c_calc   #store previosly calculated pressure for next iteration
