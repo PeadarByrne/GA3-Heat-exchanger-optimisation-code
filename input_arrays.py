@@ -9,7 +9,7 @@ nt_array = np.arange(2,22,1)
 nb_array = np.arange(2,20,1)
 
 #[Nt,Ns]
-passes_array = [[ 1,1],[2,1],[2,2]]
+passes_array = [[ 1,1],[2,1],[2,2],[4,2]]
 
 
 def Lt_calc(nt,Nt):

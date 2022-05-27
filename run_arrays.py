@@ -14,6 +14,11 @@ def choose_N(nt,Nt):
             N=3
         else:
             N=4
+    else:
+        if nt>21:
+            N=4
+        else:
+            N=3
     return N
 
 def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
