@@ -18,14 +18,23 @@ def hydraulic_h(Lt,nt,Nt,HGn,HG,year):
     e=1
 
     if Nt ==1:
-        sigma=fu.sigma(nt,1)  #area ratio of tubes to full header tank area
+        sigma_t= 1
+        sigma_n = fu.sigma(nt,1)  #area ratio of tubes to full header tank area  
     elif Nt ==2:
-        sigma = fu.sigma(nt/2,1)    #area ratio (half tubes to full header tank) in turning header tank
+        sigma_t = fu.sigma(nt/2,1)    #area ratio (half tubes to full header tank) in turning header tank
         sigma_n =fu.sigma(nt/2,0.5) #area ratio (hall tubes to half header tank) in nozzle header tank
     elif Nt ==4:
-        sigma = fu.sigma(nt/4,0.5)
+        sigma_t = fu.sigma(nt/4,0.5)
         sigma_n = fu.sigma(nt/4,0.25)
     counter =0
+
+    #Exact analytical solution for Re=inf for turbulent flow
+    #turning header tank entrance exit losses
+    kc_t = 0.4 - 0.4*sigma_t     #equal zero for single pass                     
+    ke_t = (1-sigma_t)**2 
+    #nozzle header tank entrance exit losses
+    kc_n = 0.4 - 0.4*sigma_n                         
+    ke_n = (1-sigma_n)**2 
 
     while(abs(e)>e_h_target and counter<100):
         counter +=1
@@ -38,11 +47,8 @@ def hydraulic_h(Lt,nt,Nt,HGn,HG,year):
 
         #calculate pressure drop from guessed m_h
         p_t =Nt* f*(Lt/fu.d_i)*0.5*fu.rho*v_t**2   #pressure loss along copper tubes from friction
-        
-        kc = 0.4 - 0.4*sigma                          #Exact analytical solution for Re=inf for turbulent flow
-        ke = (1-sigma)**2 
-        #print("kc,ke",kc,ke)
-        p_e = 0.5*fu.rho*v_t**2*(kc + ke)*Nt            #pressure loss caused by entrance exit losses into copper tubes - updated with Nt
+        p_e_n = 0.5*fu.rho*v_t**2*(kc_n + ke_n)   #entrance exit losses at nozzle header tanks
+        p_e_t = 0.5*fu.rho*v_t**2*(kc_t + ke_t)*(Nt -1)   #entrance exit losses in turning header tanks
         p_n = fu.rho*v_nh**2    # pressure loss from nozzles entering HX, no half because 2 nozzles
         #Turning losses in header
         if Nt == 1:
@@ -57,7 +63,7 @@ def hydraulic_h(Lt,nt,Nt,HGn,HG,year):
             area_ratio_n = (nt*0.5*math.pi*(fu.d_i/2)**2)/(HGn*fu.d_sh)
             v_header_n = area_ratio_n * v_t
             p_hturn = 0.5 *fu.rho*(v_header**2)*2+0.5 *fu.rho*(v_header_n**2)
-        p_h = p_t + p_e + p_n + p_hturn  #pressure in pascal
+        p_h = p_t + p_e_t + p_e_n + p_n + p_hturn  #pressure in pascal
         p_h_calc = p_h/1e5          #pressure in bar
 
         #Newton Raphson iterator
