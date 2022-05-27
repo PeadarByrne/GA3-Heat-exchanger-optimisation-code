@@ -18,7 +18,7 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     #     Lt = 2*Lt
 
     #Find Reynolds numbers
-    Re_i = fu.Re_t(m_h,nt)
+    Re_i = fu.Re_t(m_h,nt/Nt)
     A_sh = fu.A_sh(Y,nb,Lt,Ns) 
     Re_o = fu.Re_sh(m_c,A_sh)
 
