@@ -106,8 +106,10 @@ def hydraulic_c(Lt,Y,nb,N,Ns):
         v_sh = fu.v_sh(m_c,A_sh) 
         Re_sh = fu.Re_sh(m_c,A_sh)
         vn_c = fu.v_n(m_c)
-     
-        p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb + 1)*Ns #Shell side pressure loss normal to tubes, multiplied by Ns because two passes means each baffle is pass twice
+        if Ns==1:
+            p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb - 1)*Ns #Shell side pressure loss normal to tubes, multiplied by Ns because two passes means each baffle is pass twice
+        elif Ns==2:
+            p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb)*Ns
         p_turn = Kt*0.5*fu.rho*(v_sh**2)*Ns*nb                  #turning pressure loss
         v_ends = m_c/(fu.rho*fu.A_sh_ends(Y))
         Re_ends = v_ends*fu.d_o/fu.nu
