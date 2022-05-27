@@ -1,6 +1,7 @@
 import validity_check as check
 import single_HX_calculation as HXcalc
 import functions as fu
+import thermal_iteration as thermal
 
 design1=[14,12,1,1,0.232,0.014,4,57.5e-3,57.5e-3]
 design2=[16,6,1,1,0.21,0.01,3,50e-3,50e-3]
@@ -43,3 +44,6 @@ print('m_hc',output3[5])
 print('m_hd',output4[5])
 print('m_he',output5[5])
 print('m_hf',output6[5])
+
+Q=thermal.Thermal_LMTD(0.37, 0.36, 24, 11, 10, 0.145, 4, 1)
+print(Q)
