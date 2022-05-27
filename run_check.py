@@ -2,12 +2,12 @@ import validity_check as check
 import single_HX_calculation as HXcalc
 import functions as fu
 
-design1=[14,12,1,1,0.232,0.014,4,0.5,57.5e-3,57.5e-3]
-design2=[16,6,1,1,0.21,0.01,3,0.5,50e-3,50e-3]
-design3=[20,4,2,1,0.165,0.01,4,0.25,53.5e-3,50e-3]
-design4=[12,8,2,1,0.25,0.012,3,0.5,53e-3,30e-3]
-design5=[24,4,4,1,0.136,0.010,4,0.25,53e-3,41e-3]
-design6=[20,6,4,2,0.163,0.01,3,0.25,58e-3,23e-3]
+design1=[14,12,1,1,0.232,0.014,4,57.5e-3,57.5e-3,0.5]
+design2=[16,6,1,1,0.21,0.01,3,50e-3,50e-3,0.5]
+design3=[20,4,2,1,0.165,0.01,4,53.5e-3,50e-3,0.25]
+design4=[12,8,2,1,0.25,0.012,3,53e-3,30e-3,0.5]
+design5=[24,4,4,1,0.136,0.010,4,53e-3,41e-3,0.25]
+design6=[20,6,4,2,0.163,0.01,3,58e-3,23e-3,0.25]
 
 output1=HXcalc.single_HX_analysis(design1[0],design1[1],design1[2],design1[3],design1[4],design1[5],design1[6],design1[7],design1[8],design1[9])
 output2=HXcalc.single_HX_analysis(design2[0],design2[1],design2[2],design2[3],design2[4],design2[5],design2[6],design2[7],design2[8],design2[9])
