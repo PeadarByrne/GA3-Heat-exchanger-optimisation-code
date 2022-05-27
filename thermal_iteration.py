@@ -13,9 +13,9 @@ m_h = 0.48     #example value of hot water mass flow rate
 
 def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     #two tube passes creates an equivalent HX with nt/2 of length 2Lt
-    if Nt == 2:
-        nt = nt/2
-        Lt = 2*Lt
+    # if Nt == 2:
+    #     nt = nt/2
+    #     Lt = 2*Lt
 
     #Find Reynolds numbers
     Re_i = fu.Re_t(m_h,nt)
