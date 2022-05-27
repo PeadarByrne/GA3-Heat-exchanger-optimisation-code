@@ -9,7 +9,7 @@ import math
 
 
 
-def hydraulic_h(Lt,nt,Nt):
+def hydraulic_h(Lt,nt,Nt,HGn,HG):
     #Guess mh
     m_h=0.5
     m_h_old = 0
@@ -20,7 +20,7 @@ def hydraulic_h(Lt,nt,Nt):
     #two passes creates an equivalent HX with nt/2 of length 2Lt
     #if Nt == 2:
     #    nt = nt/2
-    #    Lt = 2*Lt
+    #    Lt = 2*Lth
 
     sigma=fu.sigma(nt)
 
@@ -29,7 +29,6 @@ def hydraulic_h(Lt,nt,Nt):
     while(abs(e)>e_h_target and counter<100):
         counter +=1
         
-
         # m_hl=fu.m_L(m_h)
         # p_pump_h=-0.4713*m_h**2-0.8896*m_h + 0.6381
 
@@ -49,14 +48,20 @@ def hydraulic_h(Lt,nt,Nt):
         p_e = 0.5*fu.rho*v_t**2*(kc + ke)*Nt            #pressure loss caused by entrance exit losses into copper tubes - updated with Nt
         p_n = fu.rho*v_nh**2    # pressure loss from nozzles entering HX, no half because 2 nozzles
 
-        header_gap = 0.03   #Header gap for a header with no nozzle
 
+        #Turning losses in header
         if Nt == 1:
             p_hturn = 0
         elif Nt == 2:
-            area_ratio = (nt*0.5*math.pi*(fu.d_i/2)**2)/(header_gap*fu.d_sh)
+            area_ratio = (nt*0.5*math.pi*(fu.d_i/2)**2)/(HG*fu.d_sh)
             v_header = area_ratio * v_t
             p_hturn = 0.5*fu.rho*(v_header**2)
+        elif Nt == 4:
+            area_ratio = (nt*0.5*math.pi*(fu.d_i/2)**2)/(HG*fu.d_sh)
+            v_header = area_ratio * v_t
+            area_ratio_n = (nt*0.5*math.pi*(fu.d_i/2)**2)/(HGn*fu.d_sh)
+            v_header_n = area_ratio_n * v_t
+            p_hturn = 0.5 *fu.rho*(v_header**2)*2+0.5 *fu.rho*(v_header_n**2)
 
         p_h = p_t + p_e + p_n + p_hturn  #pressure in pascals
         p_h_calc = p_h/1e5          #pressure in bar
@@ -113,12 +118,11 @@ def hydraulic_c(Lt,Y,nb,N,Ns):
         p_turn = Kt*0.5*fu.rho*(v_sh**2)*Ns*nb                  #turning pressure loss
         v_ends = m_c/(fu.rho*fu.A_sh_ends(Y))
         Re_ends = v_ends*fu.d_o/fu.nu
-
+        
         p_ends = 4*a*Re_ends**(-0.15)*N*fu.rho*v_ends**2*2/Ns   #pressure losses in extra spaces at ends of shell for nozzles
         p_n = 0.5*fu.rho*vn_c**2                            #nozzle losses
         p_c = p_sh + p_n + p_turn + p_ends   #calculated pressure from m_c guess
         p_c_calc = p_c/1e5  #convert pressure to bar
-        
 
         dp_calc = (p_c_calc - p_calc_old)/(m_c - m_c_old) #Calculate an approximate derivative of p_calc 
         m_c_old = m_c   #store m_c from previous guess
