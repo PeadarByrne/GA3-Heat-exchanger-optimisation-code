@@ -113,6 +113,8 @@ def hydraulic_c(Lt,Y,nb,N,Ns,year):
         v_sh = fu.v_sh(m_c,A_sh) 
         Re_sh = fu.Re_sh(m_c,A_sh)
         vn_c = fu.v_n(m_c)
+        v_ends = m_c/(fu.rho*fu.A_sh_ends(Y))
+        Re_ends = v_ends*fu.d_o/fu.nu
 
         #Calculate pressure losses
         if Ns==1:
@@ -120,10 +122,8 @@ def hydraulic_c(Lt,Y,nb,N,Ns,year):
         elif Ns==2:
             p_sh = 4*a*Re_sh**(-0.15)*N*fu.rho*v_sh**2*(nb)*Ns
         p_turn = Kt*0.5*fu.rho*(v_sh**2)*Ns*nb                  #turning pressure loss
-        v_ends = m_c/(fu.rho*fu.A_sh_ends(Y))
-        Re_ends = v_ends*fu.d_o/fu.nu
         p_ends = 4*a*Re_ends**(-0.15)*N*fu.rho*v_ends**2*2/Ns   #pressure losses in extra spaces at ends of shell for nozzles
-        p_n = 0.5*fu.rho*vn_c**2                            #nozzle losses
+        p_n = fu.rho*vn_c**2                            #nozzle losses
         p_c = p_sh + p_n + p_turn + p_ends   #calculated pressure from m_c guess
         p_c_calc = p_c/1e5  #convert pressure to bar
 
