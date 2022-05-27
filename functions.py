@@ -140,3 +140,72 @@ def index_seperator(index,nt_array,nb_array):
     i_nt=int(np.floor(index/sep))
     i_b = int(index%sep)
     return i_nt, i_b
+
+flowrate_cold_2022 = [0.5833, 0.5083, 0.4750, 0.4250, 0.3792, 0.3417, 0.2958, 0.2583, 0.2125, 0.1708]
+pdrop_cold_2022 = [0.1113,0.2157,0.2538,0.3168,0.3613,0.4031,0.4511,0.4846,0.5181,0.5573]
+
+flowrate_hot_2022 = [0.4583,0.4236,0.4010,0.3611,0.3125,0.2639,0.2222,0.1597,0.1181,0.0694]
+pdrop_hot_2022 = [0.1333,0.1756,0.2024,0.2577,0.3171,0.3633,0.4233,0.4784,0.5330,0.5715] 
+
+flowrate_cold_2019 = [0.6917,0.6750,0.6292,0.5917,0.5458,0.5083,0.4625,0.4250,0.3792,0.3417,0.2958,0.2542,0.2125,0.1708]
+pdrop_cold_2019 = [0.1475,0.1619,0.2178,0.2607,0.3041,0.3417,0.3756,0.4118,0.4423,0.4711,0.5031,0.5297,0.5561,0.5823]
+
+flowrate_hot_2019 = [0.5382,0.5278,0.4931,0.4549,0.4201,0.3854,0.3507,0.3160,0.2813,0.2465,0.2118,0.1771,0.1424,0.1076,0.0694]
+pdrop_hot_2019 = [0.1101,0.1315,0.1800,0.2185,0.2537,0.2999,0.3440,0.3780,0.4149,0.4547,0.5005,0.5271,0.5677,0.5971,0.6045]
+
+flowrate_cold_2018 = [0.4426,0.4255,0.4055,0.3913,0.3799,0.3628,0.3485,0.3286,0.3058,0.2801,0.2573,0.2317,0.2060,0.1861,0.1576,0.1319,0.1034,0.0806,0.0664,0.0521]
+pdrop_cold_2018 = [0.1068,0.1418,0.1779,0.2056,0.2382,0.2601,0.2858,0.3187,0.3627,0.4037,0.4426,0.4845,0.5213,0.5569,0.6036,0.6412,0.6838,0.7121,0.7343,0.7744]
+
+flowrate_hot_2018 = [0.4954,0.4805,0.4640,0.4475,0.4310,0.4145,0.3980,0.3815,0.3650,0.3485,0.3320,0.3155,0.2990,0.2825,0.2660,0.2495,0.2330,0.2165,0.2000,0.1819,0.1670,0.1472,0.1307,0.1142,0.1010,0.0845,0.0680,0.0515]
+pdrop_hot_2018 = [0.0989,0.1245,0.1541,0.1827,0.2083,0.2339,0.2625,0.2880,0.3115,0.3330,0.3575,0.3800,0.4014,0.4249,0.4503,0.4647,0.4900,0.5134,0.5337,0.5470,0.5703,0.5966,0.6068,0.6150,0.6242,0.6304,0.6375,0.6457]
+
+def chart_cold_pdrop(year, flowrate, poly_deg):
+
+    if year == 2022:
+        flowrate_cold = flowrate_cold_2022
+        pdrop_cold = pdrop_cold_2022
+
+    elif year == 2019:
+        flowrate_cold = flowrate_cold_2019
+        pdrop_cold = pdrop_cold_2019
+
+    elif year == 2018:
+        flowrate_cold = flowrate_cold_2018
+        pdrop_cold = pdrop_cold_2018   
+
+    #check i/p flowrate is not above the max value in given data
+    #note: we will allow extrapolation for the minimum value down to 0 pressure drop
+    max_flowrate = np.amax(flowrate_cold)
+    #if flowrate > max_flowrate:
+        #raise ValueError("Input flowrate is above the maximum value, please input a value lower than {}".format(max_flowrate))
+
+    cold_coeffs= np.polyfit(flowrate_cold, pdrop_cold,poly_deg)
+    pdrop_cold = np.poly1d(cold_coeffs)
+    pdrop_cold_deriv = pdrop_cold.deriv(1)
+
+    return pdrop_cold(flowrate), pdrop_cold_deriv(flowrate)
+
+def chart_hot_pdrop(year, flowrate, poly_deg):
+    if year == 2022:
+        flowrate_hot = flowrate_hot_2022
+        pdrop_hot = pdrop_hot_2022
+
+    elif year == 2019:
+        flowrate_hot = flowrate_hot_2019
+        pdrop_hot = pdrop_hot_2019
+
+    elif year == 2018:
+        flowrate_hot = flowrate_hot_2018
+        pdrop_hot = pdrop_hot_2018   
+
+    #check i/p flowrate is not above the max value in given data
+    #note: we will allow extrapolation for the minimum value down to 0 pressure drop
+    max_flowrate = np.amax(flowrate_hot)
+    #if flowrate > max_flowrate:
+        #raise ValueError("Input flowrate is above the maximum value, please input a value lower than {}".format(max_flowrate))
+
+    hot_coeffs = np.polyfit(flowrate_hot, pdrop_hot,poly_deg)
+    pdrop_hot = np.poly1d(hot_coeffs)
+    pdrop_hot_deriv = pdrop_hot.deriv(1)
+
+    return pdrop_hot(flowrate), pdrop_hot_deriv(flowrate)
