@@ -9,7 +9,7 @@ import math
 
 
 
-def hydraulic_h(Lt,nt,Nt):
+def hydraulic_h(Lt,nt,Nt,header_gap_n,header_gap):
     #Guess mh
     m_h=0.5
     m_h_old = 0
@@ -51,12 +51,20 @@ def hydraulic_h(Lt,nt,Nt):
 
         header_gap = 0.03   #Header gap for a header with no nozzle
 
+        #Turning losses in header
         if Nt == 1:
             p_hturn = 0
         elif Nt == 2:
             area_ratio = (nt*0.5*math.pi*(fu.d_i/2)**2)/(header_gap*fu.d_sh)
             v_header = area_ratio * v_t
             p_hturn = 0.5*fu.rho*(v_header**2)
+        elif Nt == 4:
+            area_ratio = (nt*0.5*math.pi*(fu.d_i/2)**2)/(header_gap*fu.d_sh)
+            v_header = area_ratio * v_t
+            area_ratio_n = (nt*0.5*math.pi*(fu.d_i/2)**2)/(header_gap_n*fu.d_sh)
+            v_header_n = area_ratio_n * v_t
+            p_hturn = 0.5 *fu.rho*(v_header**2)*2+0.5 *fu.rho*(v_header_n**2)
+                    
 
         p_h = p_t + p_e + p_n + p_hturn  #pressure in pascals
         p_h_calc = p_h/1e5          #pressure in bar
