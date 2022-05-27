@@ -7,9 +7,7 @@ import math
 
 
 
-
-
-def hydraulic_h(Lt,nt,Nt):
+def hydraulic_h(Lt,nt,Nt,fraction):
     #Guess mh
     m_h=0.5
     m_h_old = 0
@@ -17,14 +15,14 @@ def hydraulic_h(Lt,nt,Nt):
     e_h_target=0.0001
     e=1
 
-    #two passes creates an equivalent HX with nt/2 of length 2Lt
-    #if Nt == 2:
-    #    nt = nt/2
-    #    Lt = 2*Lt
+    #calculate the number of tubes on each side of the two pass hotside
+    #fraction is ratio of first pass tubes to total tubes
+    nt1=fraction*nt
+    nt2=(1-fraction)*nt
+    sigma1=fu.sigma(nt)
+    sigma2=fu.sigma(nt)
 
-    sigma=fu.sigma(nt)
-
-    counter =0
+    counter = 0
 
     while(abs(e)>e_h_target and counter<100):
         counter +=1
@@ -33,22 +31,31 @@ def hydraulic_h(Lt,nt,Nt):
         # m_hl=fu.m_L(m_h)
         # p_pump_h=-0.4713*m_h**2-0.8896*m_h + 0.6381
 
-        v_t=fu.v_t(m_h,nt/Nt)
-        v_nh=fu.v_n(m_h)
-        Re_t=fu.Re_t(m_h,nt/Nt)
+        v_t1=fu.v_t(m_h,nt1)
+        v_nh1=fu.v_n(m_h)
+        Re_t1=fu.Re_t(m_h,nt1)
 
         f=(1.82*np.log10(Re_t) - 1.64)**-2           #estimation of the friction factor in the copper tubes
 
         #calculate pressure drop from guessed m_h
-        p_t =Nt* f*(Lt/fu.d_i)*0.5*fu.rho*v_t**2   #pressure loss along copper tubes from friction
-        kc = 0.4 - 0.4*sigma                          #regression functions from excel for Re=inf for turbulent flow
+        p_t =f*(Lt/fu.d_i)*0.5*fu.rho*v_t**2   #pressure loss along copper tubes from friction
+        kc = 0.4 - 0.4*sigma                          #Re=inf for turbulent flow
         ke = (1-sigma)**2 
-        #kc = -0.3952*sigma + 0.4973                  #regression functions from excel for Re=10000 for turbulent flow
-        #ke = 0.9773*sigma**2 -2.0738*sigma + 0.9983  
-        #print("kc,ke",kc,ke)
         p_e = 0.5*fu.rho*v_t**2*(kc + ke)*Nt            #pressure loss caused by entrance exit losses into copper tubes - updated with Nt
         p_n = fu.rho*v_nh**2    # pressure loss from nozzles entering HX, no half because 2 nozzles
 
+        v_t2=fu.v_t(m_h,nt/Nt)
+        v_nh2=fu.v_n(m_h)
+        Re_t2=fu.Re_t(m_h,nt/Nt)
+
+        f2=(1.82*np.log10(Re_t2) - 1.64)**-2           #estimation of the friction factor in the copper tubes
+
+        #calculate pressure drop from guessed m_h
+        p_t2 =f2*(Lt/fu.d_i)*0.5*fu.rho*v_t**2   #pressure loss along copper tubes from friction
+        kc2 = 0.4 - 0.4*sigma                          #Re=inf for turbulent flow
+        ke2 = (1-sigma)**2 
+        p_e2 = 0.5*fu.rho*v_t**2*(kc + ke)*Nt            #pressure loss caused by entrance exit losses into copper tubes - updated with Nt
+        p_n2 = fu.rho*v_nh**2    # pressure loss from nozzles entering HX, no half because 2 nozzles
         header_gap = 0.03   #Header gap for a header with no nozzle
 
         if Nt == 1:
