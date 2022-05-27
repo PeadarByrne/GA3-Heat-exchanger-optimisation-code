@@ -13,7 +13,7 @@ def HX_analysis(nt,nb,Nt,Ns,Lt,Y,N,header_gap_n,header_gap):
 
     return e_LMTD , Q_LMTD, e_NTU, Q_NTU, m_c, m_h
 
-def single_HX_analysis(nt,nb,Nt,Ns,Lt,Y,N,HGn=57.5e-3,HG=57.5e-3,fraction=0.5):
+def single_HX_analysis(nt,nb,Nt,Ns,Lt,Y,N,HGn=57.5e-3,HG=57.5e-3):
     m_c=hydro.hydraulic_c(Lt,Y,nb,N,Ns)  #run cold hydrualics function
     m_h=hydro.hydraulic_h(Lt,nt,Nt,header_gap_n,header_gap)    #run hot hydraulics
     print("m_h:",m_h)
