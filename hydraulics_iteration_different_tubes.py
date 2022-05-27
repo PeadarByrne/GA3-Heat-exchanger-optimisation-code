@@ -9,7 +9,7 @@ import math
 
 
 
-def hydraulic_h(Lt,nt,Nt):
+def hydraulic_h(Lt,nt,Nt,H):
     #Guess mh
     m_h=0.5
     m_h_old = 0
