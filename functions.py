@@ -6,7 +6,6 @@ import numpy as np
 L_HX_max = 350e-3  #maximum permissible length of shell
 Lt_total_cu = 3.5  #total length of copper tube available
 Lt_extra = 12e-3 #additional length of copper pipe needed to fit pipes in securely, sum of both ends
-#Lt_max = L_HX_max - 100 -Lt_extra     #Based on maintaining the minium HX
 t_b = 1.5e-3    #baffle thickness
 t_p = 4.5e-3    #tube plate and end plate thickness
 bore_n = 20e-3  #bore of nozzles
@@ -17,8 +16,6 @@ d_o = 8e-3     #OD copper tube
 d_n = 19e-3   #nozzle internal diameter
 d_sh = 64e-3    #shell internal diameter
 shell_nozzle_space = 38.625e-3  #extra room needed t end of shell for nozzle
-
-#testlester
 
 #Mass constraints
 mass_limit = 1.155 #limit to the total mass of the heat exchanger
@@ -31,17 +28,6 @@ mab = 2.39  #mass per unit area for baffles
 
 #Geometric specifications - variables
 l = 350e-3   #length of shell
-
-#Lt = 350e-3    #length of copper tube
-#nt = 13   #number of tubes
-#N = 13    #number of tubes in shell flow path
-#nt_cross = 5    #number of tubes in longest straight line
-#nb = 9     #number of baffles
-#Y = 14e-3    #pitch spacing between centres
-#pitch_shape = 'square'   #string description 'triangular' or 'square'
-
-
-
 
 #Physical properties
 Cp = 4179     #specific heat capacity of fluid
@@ -61,7 +47,7 @@ def A(d):
     return np.pi*d**2/4
 
 def A_sh(Y,nb,Lt,Ns):
-    #b = Lt/(nb+1)   #baffle spacing
+    #calculate flow area between tubes
     if Ns ==1:
         b = (Lt-(2*shell_nozzle_space))/(nb-1)  #baffle spacing
         A_sh = d_sh*(Y - d_o)*(b/Y)   #flow area perpendicular to the tubes for the full diameter
@@ -96,7 +82,7 @@ def m_t(m_h,nt):
 #     return ml
 
 def v_t(m_h,nt):
-    #m_t = m_t(m_h)
+    #Calculate tube velocity
     m_t = m_h/nt
     v_t = m_t/(rho*A(d_i))
     return  v_t
@@ -114,8 +100,9 @@ def v_n(m):
     v_n = m/(rho*A(d_n))
     return v_n
 
-def sigma(nt):
-    return nt*A(d_i)/A(d_sh)
+def sigma(nt,ratio):
+    #calculate area of tube exit to shell expansion area
+    return nt*A(d_i)/(ratio*A(d_sh))
 
     
 def v_sh(m_c,A_sh):

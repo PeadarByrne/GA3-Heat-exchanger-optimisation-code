@@ -17,8 +17,14 @@ def hydraulic_h(Lt,nt,Nt,HGn,HG,year):
     e_h_target=0.0001
     e=1
 
-    sigma=fu.sigma(nt)
-
+    if Nt ==1:
+        sigma=fu.sigma(nt,1)  #area ratio of tubes to full header tank area
+    elif Nt ==2:
+        sigma = fu.sigma(nt/2,1)    #area ratio (half tubes to full header tank) in turning header tank
+        sigma_n =fu.sigma(nt/2,0.5) #area ratio (hall tubes to half header tank) in nozzle header tank
+    elif Nt ==4:
+        sigma = fu.sigma(nt/4,0.5)
+        sigma_n = fu.sigma(nt/4,0.25)
     counter =0
 
     while(abs(e)>e_h_target and counter<100):
@@ -32,6 +38,7 @@ def hydraulic_h(Lt,nt,Nt,HGn,HG,year):
 
         #calculate pressure drop from guessed m_h
         p_t =Nt* f*(Lt/fu.d_i)*0.5*fu.rho*v_t**2   #pressure loss along copper tubes from friction
+        
         kc = 0.4 - 0.4*sigma                          #Exact analytical solution for Re=inf for turbulent flow
         ke = (1-sigma)**2 
         #print("kc,ke",kc,ke)
