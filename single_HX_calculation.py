@@ -23,15 +23,6 @@ def single_HX_analysis(nt,nb,Nt,Ns,Lt,Y,N,HGn=57.5e-3,HG=57.5e-3,fraction=0.5):
 
     return e_LMTD , Q_LMTD, e_NTU, Q_NTU
 
-def single_HX_analysis_special(nt,nb,Nt,Ns,Lt,Y,N,HGn=53.5-3,HG=50e-3,fraction=0.25):
-    m_c=hydro.hydraulic_c(Lt,Y,nb,N,Ns)  #run cold hydrualics function
-    m_h=hydro.hydraulic_h(Lt,nt,Nt,header_gap_n,header_gap)    #run hot hydraulics
-    print("m_h:",m_h)
-    print("m_c", m_c)
-    e_LMTD,Q_LMTD = thermal.Thermal_LMTD(m_h,m_c,nt,nb,Y,Lt, Nt, Ns)    #Run LMDT analysis
-    e_NTU,Q_NTU = thermal.Thermal_NTU(m_h,m_c,nt,nb,Y,Lt,Ns)   #Run NTU analysis
-
-    return e_LMTD , Q_LMTD, e_NTU, Q_NTU
 
 #nt,nb,Nt,Ns,Lt,Y,N
 JL_2018 = [13,14,1,1,0.35,0.012,3]
