@@ -30,6 +30,7 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
             #find Y
             Y=pitch_array[j]
 
+            #find N the number of rows passed
             N = input.choose_N(nt,Nt)
             
             for k in range(len(nb_array)):
@@ -83,7 +84,6 @@ e_LMTD = top_design[7]
 m_c = top_design[8]
 m_h = top_design[9]
 
-# nt,nb,Nt,Ns,Lt,Y,e_LMTD,Q_LMTD=run_optimisation(input.nt_array,input.nb_array,input.passes_array,input.Lt_array,input.pitch_array)
 print('nt = ',nt)
 print('nb = ',nb)
 print('Nt = ',Nt)
