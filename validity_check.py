@@ -29,6 +29,16 @@ def CheckMass(Lt,nt,nb,Nt,Ns):
         l=Lt+0.08
         #mass of splitter in end chamber and 
         mass_splitter = (0.05 + Lt)*fu.d_sh*fu.mab
+    elif Nt==4 and Ns==1:
+        #One smaller end chamber
+        l=Lt+0.08
+        #mass of splitter in end chamber and 
+        mass_splitter = 2*0.05*fu.d_sh*fu.mab
+    elif Nt==4 and Ns==2:
+        #One smaller end chamber
+        l=Lt+0.08
+        #mass of splitter in end chamber and 
+        mass_splitter = (2*0.05 +Lt)*0.05*fu.d_sh*fu.mab
 
     l+=9e-3
     mass_shell = l*fu.mls    #total mass of shell, including around end chambers
