@@ -11,14 +11,14 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
     output_array = []
     Q_output_array = []
 
-    #passes loop
+
     for i in range(len(passes_array)):
-        #Iterates different passes
+        #Iterates different configurations of passes
         Nt=passes_array[i][0]
         Ns=passes_array[i][1]
 
-        #nt loop
         for j in range(len(nt_array)):
+            #iterates for different numbers of tubes
             nt=nt_array[j]
 
             #find Lt
@@ -32,9 +32,8 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
 
             N = input.choose_N(nt,Nt)
             
-            
-            #nb loop
             for k in range(len(nb_array)):
+                #iterate for different number of baffles
                 nb=nb_array[k]
 
                 #uncomment below to run analysis without mass checks
@@ -66,18 +65,6 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
         top_designs.append(output_array.pop(index_max))
         Q_top_design = Q_output_array.pop(index_max)
     
-
-
-    #Find design values of best case
-    # nt=output_array[index_max][0]
-    # nb=output_array[index_max][1]
-    # Nt=output_array[index_max][2]
-    # Ns=output_array[index_max][3]
-    # Lt=output_array[index_max][4]
-    # Y=output_array[index_max][5]
-    ##Find effectiveness of best case
-    #e_LMTD=output_array[index_max][6]
-
     return top_designs #nt,nb,Nt,Ns,Lt,Y,e_LMTD,Q_LMTD
 
 top_designs =run_optimisation(input.nt_array,input.nb_array,input.passes_array,input.Lt_array,input.pitch_array)
