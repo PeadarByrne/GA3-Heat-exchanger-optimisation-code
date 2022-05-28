@@ -45,5 +45,3 @@ print('m_hd',output4[5])
 print('m_he',output5[5])
 print('m_hf',output6[5])
 
-Q=thermal.Thermal_LMTD(0.37, 0.36, 24, 11, 10, 0.145, 4, 1)
-print(Q)
