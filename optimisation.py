@@ -6,26 +6,10 @@ import input_arrays as input
 import validity_check as check
 
 
-def choose_N(nt,Nt):
-    if Nt == 2:
-        N = 3
-    elif Nt == 1:
-        if nt < 14:
-            N=3
-        else:
-            N=4
-    else:
-        if nt>21:
-            N=4
-        else:
-            N=3
-    return N
-
 def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
     #initialise output array
     output_array = []
     Q_output_array = []
-
 
     #passes loop
     for i in range(len(passes_array)):
@@ -46,7 +30,7 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
             #find Y
             Y=pitch_array[j]
 
-            N = choose_N(nt,Nt)
+            N = input.choose_N(nt,Nt)
             
             
             #nb loop

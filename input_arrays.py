@@ -52,4 +52,17 @@ pitch_array =[]
 for i in nt_array:
     pitch_array.append(round(pitch(i),5))
 
-print(pitch_array)
+def choose_N(nt,Nt):
+    if Nt == 2:
+        N = 3
+    elif Nt == 1:
+        if nt < 14:
+            N=3
+        else:
+            N=4
+    else:
+        if nt>21:
+            N=4
+        else:
+            N=3
+    return N

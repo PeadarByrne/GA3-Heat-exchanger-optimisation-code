@@ -89,7 +89,7 @@ def v_t(m_h,nt):
 
 
 def Re_t(m_h,nt):
-    #calculate Reynolds from mass flow rate
+    #calculate Reynolds inside copper tube
     m_t = m_h/nt
     v_t = m_t/(rho*A(d_i))
     Re_t=(v_t*d_i)/nu
