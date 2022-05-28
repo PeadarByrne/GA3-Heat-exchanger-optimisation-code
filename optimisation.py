@@ -49,7 +49,7 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
                 try:
                     #check.CheckMass(Lt,nt,nb,Nt,Ns)
                     #run single analysis
-                    e_LMTD , Q_LMTD, e_NTU, Q_NTU, m_c, m_h = HXcalc.HX_analysis(nt,nb,Nt,Ns,Lt,Y,N,2022)
+                    e_LMTD , Q_LMTD, e_NTU, Q_NTU, m_c, m_h = HXcalc.single_HX_analysis(nt,nb,Nt,Ns,Lt,Y,N,2022)
                     #append results into one output array
                     output=[nt,nb,Nt,Ns,Lt,Y,Q_LMTD, e_LMTD,m_c,m_h]    #added Q to this array so all design data in this array
                     output_array.append(output)
