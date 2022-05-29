@@ -17,6 +17,7 @@ output4=HXcalc.single_HX_analysis(design4[0],design4[1],design4[2],design4[3],de
 output5=HXcalc.single_HX_analysis(design5[0],design5[1],design5[2],design5[3],design5[4],design5[5],design5[6],design5[7],design5[8],design1[9])
 output6=HXcalc.single_HX_analysis(design6[0],design6[1],design6[2],design6[3],design6[4],design6[5],design6[6],design6[7],design6[8],design1[9])
 
+print('2022')
 print('Qa = ',output1[1])
 print('Qb = ',output2[1])
 print('Qc = ',output3[1])

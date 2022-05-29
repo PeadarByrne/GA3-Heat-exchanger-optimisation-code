@@ -5,12 +5,12 @@ import hydraulics_iteration as hydro
 
 print('2019')
 
-design1=[]
-design2=[]
-design3=[]
-design4=[]
-design5=[]
-design6=[]
+design1=[16,	12,	4,	2,	0.2092,	0.01,	4,	2019,	0.0495,	0.0165]
+design2=[14,	11,	2,	2,	0.214,	0.01,	3.5,	2019,	0.0515,	0.0165]
+design3=[16,	6,	2,	1,	0.21,	0.01,	4,	2019,	0.0495,	0.0205]
+design4=[20,	6,	4,	2,	0.181,	0.012,	3,	2019,	0.0495,	0.0195]
+design5=[18,	8,	2,	1,	0.2,	0.0115,	4,	2019,	0.0515,	0.0215]
+design6=[13,	14,	1,	1,	0.2,	12,	3,	2019,	0.05,	0.05]   #Blind test case
 
 output1=HXcalc.single_HX_analysis(design1[0],design1[1],design1[2],design1[3],design1[4],design1[5],design1[6],design1[7],design1[8],design1[9])
 output2=HXcalc.single_HX_analysis(design2[0],design2[1],design2[2],design2[3],design2[4],design2[5],design2[6],design2[7],design2[8],design1[9])
@@ -24,26 +24,26 @@ print('Qb = ',output2[1])
 print('Qc = ',output3[1])
 print('Qd = ',output4[1])
 print('Qe = ',output5[1])
-print('Qf = ',output6[1])
+print('Q_blind = ',output6[1])
 
 print('Ea = ',output1[0])
 print('Eb = ',output2[0])
 print('Ec = ',output3[0])
 print('Ed = ',output4[0])
 print('Ee = ',output5[0])
-print('Ef = ',output6[0])
+print('E_blind = ',output6[0])
 
 print('m_ca = ',output1[4])
 print('m_cb = ',output2[4])
 print('m_cc = ',output3[4])
 print('m_cd = ',output4[4])
 print('m_ce = ',output5[4])
-print('m_cf = ',output6[4])
+print('m_c_blind = ',output6[4])
 
-print('m_ha',output1[5])
-print('m_hb',output2[5])
-print('m_hc',output3[5])
-print('m_hd',output4[5])
-print('m_he',output5[5])
-print('m_hf',output6[5])
+print('m_ha =',output1[5])
+print('m_hb =',output2[5])
+print('m_hc =',output3[5])
+print('m_hd =',output4[5])
+print('m_he =',output5[5])
+print('m_h_blind =',output6[5])
 
