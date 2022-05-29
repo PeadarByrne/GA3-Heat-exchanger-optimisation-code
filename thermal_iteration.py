@@ -8,7 +8,7 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     Re_i = fu.Re_t(m_h,nt/Nt)   #Internal tube reynolds number
     A_sh = fu.A_sh(Y,nb,Lt,Ns)  #Shell area between tubes
     Re_o = fu.Re_sh(m_c,A_sh)   #External shell reynolds
-
+   
     pitch_shape = "triangular"
     c , a = fu.pitch_constants(pitch_shape)
 
@@ -35,6 +35,8 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     #while loop to iteratively solve the  three thermal equations (Eq.1 in handout)
     while (dT_c>dT_target) or (dT_h>dT_target):
         counter += 1
+        delta_T_lm = ((fu.T_h_in-T_c_out)-(T_h_out-fu.T_c_in))/(np.log((fu.T_h_in-T_c_out)/(T_h_out-fu.T_c_in)))
+      
 
         #Correction factor for multipass designs
         if (Nt==1) and (Ns==1): #one shell one pass
@@ -52,7 +54,7 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
                 F = np.sqrt(2)*((1-W_dash)/W_dash)/np.log(((W_dash/(1-W_dash))+(1/np.sqrt(2)))/((W_dash/(1-W_dash))-(1/np.sqrt(2))))
 
         #Solve three  thermal equations for outlet temperatures
-        delta_T_lm = ((fu.T_h_in-T_c_out)-(T_h_out-fu.T_c_in))/(np.log((fu.T_h_in-T_c_out)/(T_h_out-fu.T_c_in)))
+
         T_c_out = ((F * U * A_o * delta_T_lm)+(fu.T_c_in * m_c * fu.Cp))/(m_c*fu.Cp)     #finds new cold output temp
         T_h_out = (-(F * U * A_o * delta_T_lm)+(fu.T_h_in * m_h * fu.Cp))/(m_h*fu.Cp)    #finds new hot output temp
         
@@ -60,7 +62,7 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
         dT_c = abs(T_c_out-T_c_out_old)     #finds change in estimated cold output temp
         dT_h = abs(T_h_out-T_h_out_old)     #finds change in estimated hot output temp
         T_c_out_old = T_c_out   #store the old values
-        T_h_out_old = T_h_out    
+        T_h_out_old = T_h_out   
         T_h_out = 0.5*T_h_out + 0.5*T_h_out_old #weighted average for new value
         T_c_out = 0.5*T_c_out + 0.5*T_c_out_old
 
@@ -68,15 +70,13 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     mc_c = m_c*fu.Cp            #mass flow times specific heat capacity
     mc_h = m_h*fu.Cp
     mc_min = min(mc_h,mc_c)     #find the minimum value of m*cp
-    
+
     #find effectiveness using the fluid with minimum m*cp
     if mc_min == mc_c :
         e=(T_c_out-fu.T_c_in)/(fu.T_h_in-fu.T_c_in)
     else:
         e=(fu.T_h_in-T_h_out)/(fu.T_h_in-fu.T_c_in)
-    
     return e,Q
-
 
 
 def Thermal_NTU(m_h, m_c, nt, nb, Y, Lt, Ns):

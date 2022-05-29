@@ -6,11 +6,15 @@ import functions as fu
 nt_array = np.arange(2,22,1)
 
 #numbers of baffles
-nb_array = np.arange(2,20,1)
+nb_array = [np.arange(2,20,1),np.arange(2,12,1)]
+#nb_array_1 = [np.arange(2,20,1)]
+#nb_array_2 = [np.arange(2,12,1)]
+#nb_array = np.arange(2,20,1)
+
 
 #[Nt,Ns]
 passes_array = [[ 1,1],[2,1],[2,2],[4,1],[4,2]]
-
+ 
 
 def Lt_calc(nt,Nt):
     Lt_calc = fu.Lt_total_cu/nt - 12e-3 #length of copper tube inside HX calculated by dividing total cu pipe by nt

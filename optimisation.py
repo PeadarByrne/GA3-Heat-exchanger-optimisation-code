@@ -1,6 +1,5 @@
 from numpy import append
 import functions as fu
-#import validity_check as check
 import single_HX_calculation as HXcalc
 import input_arrays as input
 import validity_check as check
@@ -16,6 +15,12 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
         #Iterates different configurations of passes
         Nt=passes_array[i][0]
         Ns=passes_array[i][1]
+
+        if Ns ==1:
+            nb_array = input.nb_array[0]
+
+        elif Ns ==2:
+            nb_array = input.nb_array[1]
 
         for j in range(len(nt_array)):
             #iterates for different numbers of tubes
@@ -38,9 +43,9 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
                 nb=nb_array[k]
 
                 #uncomment below to run analysis without mass checks
-                # e_LMTD , Q_LMTD, e_NTU, Q_NTU = HXcalc.HX_analysis(nt,nb,Nt,Ns,Lt,Y,N)
+                # e_LMTD , Q_LMTD, e_NTU, Q_NTU,m_c, m_h = HXcalc.single_HX_analysis(nt,nb,Nt,Ns,Lt,Y,N,2022)
                 # #append results into one output array
-                # output=[nt,nb,Nt,Ns,Lt,Y,Q_LMTD,e_LMTD]
+                # output=[nt,nb,Nt,Ns,Lt,Y,Q_LMTD,e_LMTD,m_c, m_h]
                 # output_array.append(output)
                 # Q_output_array.append(Q_LMTD)
 
@@ -49,13 +54,15 @@ def run_optimisation(nt_array,nb_array,passes_array,Lt_array,pitch_array):
                 try:
                     check.CheckMass(Lt,nt,nb,Nt,Ns)
                     #run single analysis
-                    e_LMTD , Q_LMTD, e_NTU, Q_NTU, m_c, m_h = HXcalc.single_HX_analysis(nt,nb,Nt,Ns,Lt,Y,N,2022)
+                    e_LMTD , Q_LMTD, e_NTU, Q_NTU, m_c, m_h = HXcalc.single_HX_analysis(nt,nb,Nt,Ns,Lt,Y,N,2022)    #nt,nb,Nt,Ns,Lt,Y,N,year
                     #append results into one output array
                     output=[nt,nb,Nt,Ns,Lt,Y,Q_LMTD, e_LMTD,m_c,m_h]    #added Q to this array so all design data in this array
                     output_array.append(output)
                     Q_output_array.append(Q_LMTD)
                 except ValueError:
                     print('Illegal design skipped')
+
+
                 k+=1
             
     #Find index of best heat transfer case
