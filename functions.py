@@ -76,10 +76,10 @@ def m_t(m_h,nt):
     m_t = m_h/nt
     return m_t
 
-# def m_L(m):
-#     #convert kg/s to litres/second
-#     ml =m*(rho/1000)
-#     return ml
+def mkg_to_mL(m):
+    #convert kg/s to litres/second
+    ml =m*(rho/1000)
+    return ml
 
 def v_t(m_h,nt):
     #Calculate tube velocity
