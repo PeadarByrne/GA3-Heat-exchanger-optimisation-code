@@ -8,9 +8,9 @@ design2=[16,6,1,1,0.21,0.01,3,2022,50e-3,50e-3]
 design3=[20,4,2,1,0.165,0.01,4,2022,53.5e-3,50e-3]
 design4=[12,8,2,1,0.25,0.012,3,2022,53e-3,30e-3]
 design5=[24,4,4,1,0.136,0.010,4,2022,53e-3,41e-3]
-design6=[20,6,4,2,0.163,0.01,3,2022,58e-3,23e-3]
-design7=[13,	14,	1,	1,	0.35,	0.012,	3,	2022,	0.0535,	0.5350] #JPL-2018 tested 2022
-design8=[14,	12,	2,	2,	0.216,	0.015,	2,	2022,	0.0410,	0.0230] #2017-B tested 2022
+design6=[20,6,4,2,0.163,0.010,3,2022,58e-3,23e-3]
+design7=[13, 14,1,1,0.35,0.012,3,2022,0.0535,0.5350] #JPL-2018 tested 2022
+design8=[14,12,	2,2,0.216,0.014,3,2022,0.0410,0.0230] #2017-B tested 2022
 
 
 
@@ -49,8 +49,8 @@ print('m_cc   = ',output3[4])
 print('m_cd   = ',output4[4])
 print('m_ce   = ',output5[4])
 print('m_cf   = ',output6[4])
-print('m_jpl  = ',output7[4])
-print('m_2017 = ',output8[4])
+print('m_cjpl  = ',output7[4])
+print('m_c2017 = ',output8[4])
 
 print('m_ha   =',output1[5])
 print('m_hb   =',output2[5])
@@ -58,6 +58,6 @@ print('m_hc   =',output3[5])
 print('m_hd   =',output4[5])
 print('m_he   =',output5[5])
 print('m_hf   =',output6[5])
-print('m_jpl  =',output7[5])
-print('m_2017 =',output8[5])
+print('m_hjpl  =',output7[5])
+print('m_h2017 =',output8[5])
 
