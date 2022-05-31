@@ -87,7 +87,8 @@ def hydraulic_h(Lt,nt,Nt,HGn,HG,year):
     # if m_hl < 0.0694:
     #     print('hotside-outside the pumps performance limits')
     #     raise ValueError('outside the pumps performance limits')
-    fudge=0.91
+    
+    fudge =0.91
     m_h = m_h*fudge
     return m_h    
 
@@ -150,7 +151,11 @@ def hydraulic_c(Lt,Y,nb,N,Ns,year):
     # if m_cl < 0.1708:
     #     print('coldside-outside the pumps performance limits')
     #     raise ValueError('outside the pumps performance limits')
-    fudge=1.1
+
+    if Ns ==1:
+        fudge=0.97
+    elif Ns ==2:
+        fudge=1.22
     m_c = m_c*fudge
     return m_c
 

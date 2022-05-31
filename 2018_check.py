@@ -6,7 +6,7 @@ import hydraulics_iteration as hydro
 print('2018')
 #        nt,nb,Nt,Ns,Lt,Y,N,year,HGn=57.5e-3,HG=57.5e-3
 design1=[20,8,4,2,0.129,0.012,3,2018,0.0495,0.0205]
-design2=[24,6,2,2,0.118,0.01,3,2018,0.0495,0.0225]
+design2=[24,6,2,2,0.118,0.01,3,2018,0.0495,0.0205]
 design3=[16,5,2,2,0.156,0.011,3,2018,0.0495,0.0205]
 
 output1=HXcalc.single_HX_analysis(design1[0],design1[1],design1[2],design1[3],design1[4],design1[5],design1[6],design1[7],design1[8],design1[9])
