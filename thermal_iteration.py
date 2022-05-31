@@ -77,7 +77,18 @@ def Thermal_LMTD(m_h, m_c, nt, nb, Y, Lt, Nt, Ns):
     else:
         e=(fu.T_h_in-T_h_out)/(fu.T_h_in-fu.T_c_in)
 
-    #Q =fudge*Q
+    if Ns ==1 and Nt ==1: 
+        fudge =1  
+    elif Ns ==1 and Nt ==2:
+        fudge = 1.06
+    elif Ns ==2 and Nt ==2:
+        fudge =0.98 
+    elif Ns ==1 and Nt ==4:
+        fudge =0.9 #not based on any data just a guess!!!
+    elif Ns ==2 and Nt ==4:  
+        fudge=0.88
+
+    Q =fudge*Q
     return e,Q
 
 
