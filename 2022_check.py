@@ -3,6 +3,7 @@ import single_HX_calculation as HXcalc
 import functions as fu
 import thermal_iteration as thermal
 
+#order of inputs nt,nb,Nt,Ns,Lt,Y,N,year,HGn=57.5e-3,HG=57.5e-3
 design1=[14,12,1,1,0.232,0.014,4,2022,57.5e-3,57.5e-3]
 design2=[16,6,1,1,0.21,0.01,3,2022,50e-3,50e-3]
 design3=[20,4,2,1,0.165,0.01,4,2022,53.5e-3,50e-3]
